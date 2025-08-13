@@ -1,0 +1,490 @@
+/* ===========================
+   ESTILOS GENERALES
+=========================== */
+
+/* Reset y cuerpo */
+body {
+  background-color: #eef6fb;  /* azul pastel */
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #34495e;
+  transition: background-color 0.4s ease;
+}
+
+/* ===========================
+   TIPOGRAFÍA Y TEXTOS
+=========================== */
+
+h1 {
+  color: #60a5fa;
+  font-weight: 500;
+  margin-top: 1em;
+  text-align: center;
+}
+h2 {
+  font-weight: 500;
+  color: #3b82f6;
+}
+small {
+  font-weight: normal;
+  font-size: 0.8em;
+  color: #64748b;
+}
+
+/* ===========================
+   ENLACES
+=========================== */
+
+a {
+  color: #60a5fa;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #7c3aed;
+}
+
+/* ===========================
+   CONTENEDOR PRINCIPAL
+=========================== */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar .nav-link {
+  color: #1e293b !important;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.navbar .nav-link:hover {
+  color: #2563eb !important;
+}
+.navbar .navbar-brand {
+  color: #0f172a !important;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+/* ===========================
+   BOTONES PASTEL para inicio pagina indesx
+=========================== */
+
+.pastel-button {
+  position: relative;               /* necesario para el brillo */
+  overflow: hidden;                /* oculta lo que se sale */
+  border: none;                    /* sin borde */
+  border-radius: 12px;             /* bordes redondeados */
+  color: white;                    /* texto blanco */
+  padding: 12px 24px;              /* espacio interior */
+  font-size: 16px;                 /* tamaño de letra */
+  cursor: pointer;                 /* mano al pasar */
+  margin: 10px 4px;                /* espacio alrededor */
+  transition: transform 0.3s, box-shadow 0.3s, background 0.4s;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2); /* sombra suave */
+  animation: bounce 2.5s infinite; /* animación de rebote suave */
+}
+
+/* Fondo degradado estilo menta */
+.btn-menta {
+  background: linear-gradient(to right, #b2fef7, #4dd0e1);
+}
+
+/* Hover: agranda, cambia fondo y resplandece */
+.btn-menta:hover {
+  background: linear-gradient(to right, #80deea, #26c6da);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(38, 198, 218, 0.5);
+}
+
+/* Brillo al pasar el mouse */
+.pastel-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+.pastel-button:hover::after {
+  left: 130%;
+}
+
+/* Rebote automático */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+
+.btn-azul {
+  background: linear-gradient(to right, #d0e8ff, #7fb3ff);
+}
+.btn-azul:hover {
+  background: linear-gradient(to right, #a4ccff, #5fa3f5);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(95, 163, 245, 0.5);
+}
+
+/* ===========================
+   FEMENINO
+=========================== */
+
+/* Estilo personalizado para que el ícono del botón hamburguesa sea visible */
+.navbar-toggler {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.6); /* fondo claro translúcido */
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(80, 80, 80, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  filter: none;
+}
+
+
+/* ===========================
+   MEDIA QUERIES
+=========================== */
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ===========================
+   ESTILOS EXCLUSIVOS: MASCULINOS.HTML
+=========================== */
+
+.navbar-toggler {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(80, 80, 80, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.img-masculina {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s;
+}
+.img-masculina:hover {
+  transform: scale(1.02);
+}
+
+.descripcion {
+  background: #ffffffcc;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Botón masculina */
+.btn-azul {
+  background: linear-gradient(to right, #5072ed, #0b0327);
+}
+
+.btn-azul:hover {
+  background: linear-gradient(to right, #46e3f1, #0c97e7);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(190, 129, 248, 0.5);
+}
+
+/* ===========================
+   ESTILOS EXCLUSIVOS: FEMENINOS.HTML
+=========================== */
+
+body.femenina {
+  background: linear-gradient(to bottom right, #fdf0fa, #fde5f7);
+}
+
+.img-femenina {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s;
+}
+
+.img-femenina:hover {
+  transform: scale(1.02);
+}
+
+.descripcion-femenina {
+  background: #fff0f7cc;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+/* Botón Rosa Pastel */
+.btn-rosa {
+  background: linear-gradient(to right, #19181a, #d38eff);
+}
+
+.btn-rosa:hover {
+  background: linear-gradient(to right, #e1b0f8, #be81f8);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(190, 129, 248, 0.5);
+}
+
+
+/* ===========================
+   ESTILOS INCIO INDEX.HTML
+=========================== */
+/* BOTÓN  VISIBLE SOBRE FONDO MOVEIL */
+.navbar-toggler {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7); /* fondo claro translúcido */
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(80, 80, 80, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* BOTÓN CHEVERE PAGIN BUSCAR INCIO GRANDE */
+
+/* BOTÓN HAMBURGUESA VISIBLE SOBRE FONDO PASTEL */
+
+
+/* ===========================
+   ESTILOS PARA esencias.html
+=========================== */
+
+/* Botón pastel personalizado */
+.pastel-button {
+  padding: 0.6em 1.5em;
+  font-size: 1rem;
+  border-radius: 20px;
+  border: none;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+/* Botón durazno */
+.btn-durazno {
+  background-color: #ffb88c;
+}
+
+.btn-durazno:hover {
+  background-color: #ff9966;
+  transform: scale(1.05);
+}
+
+/* =======================================
+  ESTITL FLOMULARIO
+========================================== */
+.banner-esencias {
+  background-color: #f3f8fd;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.banner-esencias .banner-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.banner-esencias .main-title {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* CONTENEDOR DESCRIPTIVO */
+.contenedor-esencias {
+  background-color: #ffffffdd;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* CONTENEDOR DE IMAGEN */
+.contenedor-esencia-imagen {
+  background: linear-gradient(to bottom right, #ffe4f0, #f9d0ff);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* IMAGEN DESTACADA */
+.img-esencias-sola {
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease;
+}
+
+.img-esencias-sola:hover {
+  transform: scale(1.04);
+}
+/* Botón para pagina contacto */
+.btn-masculino {
+  background: linear-gradient(to right, #2c3e50, #34495e);  /* azul grisáceo */
+  color: #ecf0f1;  /* gris muy claro */
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 4px;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-masculino:hover {
+  background: linear-gradient(to right, #1c2833, #2e4053);
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(44, 62, 80, 0.4);
+}
+
+
+
+/* =======================================
+   CARRUSEL
+========================================== */
+/* === Estilos personalizados para el carrusel === */
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 5%;
+}
+
+.carousel-control-prev {
+  left: 0;
+}
+
+.carousel-control-next {
+  right: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-size: 50% 50%;
+}
+/* =======================================
+   TABLA
+========================================== */
+
+/* Colores pastel personalizados */
+.badge.bg-success {
+  background-color: #a8e6cf !important;  /* Verde pastel */
+  color: #256029;  /* Verde musgo oscuro para contraste */
+}
+
+.badge.bg-danger {
+  background-color: #ff8b94 !important;  /* Rojo pastel */
+  color: #6e1f1f;  /* Rojo oscuro para texto */
+}
+
+.badge.bg-warning {
+  background-color: #fff3b0 !important;  /* Amarillo pastel */
+  color: #7a6b00;  /* Amarillo oscuro para texto */
+}
+
+/* =======================================
+   botones rede soacioles
+========================================== */
+.btn-red-social {
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+/* Facebook pastel */
+.btn-facebook {
+  background-color: #a3c0ff; /* azul pastel */
+  border: 2px solid #7a9eff;
+}
+
+.btn-facebook:hover {
+  background-color: #7a9eff; /* azul más intenso */
+  border-color: #507acc;
+}
+
+/* Instagram pastel */
+.btn-instagram {
+  background: linear-gradient(45deg, #ffd1e8, #ffd9b3); /* rosa y melocotón pastel */
+  border: 2px solid #ffb3cc;
+  color: #6b3e54;
+}
+
+.btn-instagram:hover {
+  background: linear-gradient(45deg, #ffb3cc, #ffcc99);
+  border-color: #ff8fb3;
+  color: #422633;
+}
+
+/* TikTok pastel kawaii */
+.btn-tiktok {
+  background-color: #2c2c2c; /* negro grisáceo, suave */
+  border: 2px solid #444444; /* borde gris oscuro */
+  color: #f0f0f0; /* texto blanco suave */
+}
+
+.btn-tiktok:hover {
+  background-color: #1a1a1a; /* negro un poco más intenso */
+  border-color: #555555;
+  color: #ffffff;
+}
+
+
+/* Iconos de bootstrap ajustados para verse mejor */
+.btn-red-social i {
+  font-size: 1.2rem;
+}
