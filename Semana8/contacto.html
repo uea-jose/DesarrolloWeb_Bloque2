@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Tu CSS personalizado -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Banner de contacto -->
+  <div class="banner-esencias text-center">
+    <p class="h2 main-title mt-3">Contáctanos</p>
+  </div>
+
+  <!-- Descripción principal -->
+  <div class="container mt-4 contenedor-esencias text-center">
+    <p class="lead">
+      Déjanos tus datos y lo que buscas, nos pondremos en contacto pronto.
+    </p>
+  </div>
+
+<!-- Formulario centrado y resaltado -->
+<div class="container d-flex justify-content-center mt-4">
+  <div class="col-md-6 p-4 bg-light rounded shadow">
+    <form id="formulario">
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail"
+          aria-describedby="emailHelp"
+          name="campoEmail"
+          required
+        />
+        <div class="form-text" id="emailHelp">
+          No compartiremos su correo electrónico.
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          id="inputPassword"
+          class="form-control"
+          name="campoPassword"
+          required
+        />
+        <div id="contrasenaFeedback" class="form-text text-danger"></div>
+
+        <!-- Lista de requisitos de la contraseña -->
+        <ul id="requisitosContrasena" class="mt-2 ps-3">
+          <li id="req-mayus-minus">❌ Mayúsculas y minúsculas</li>
+          <li id="req-numero">❌ Número (0-9)</li>
+          <li id="req-longitud">❌ 8 caracteres</li>
+          <li id="req-simbolo">❌ Al menos un símbolo o carácter especial</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <label for="confirmarContrasena" class="form-label">Repetir Contraseña</label>
+        <input type="password" id="confirmarContrasena" class="form-control" required>
+        <div id="confirmarContrasenaFeedback" class="form-text text-danger"></div>
+      </div>
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          id="inputCheck"
+          class="form-check-input"
+          name="campoAceptar"
+          required
+        />
+        <label for="inputCheck" class="form-check-label">Aceptar las condiciones</label>
+      </div>
+
+      <button class="btn btn-info w-100" type="submit" id="btnEnviar">
+        Enviar
+      </button>
+      <button class="btn btn-dark w-100 d-none" disabled id="btnCargando">
+        <span
+          class="spinner-grow spinner-grow-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Cargando...
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<!-- BOTÓN VOLVER AL INICIO -->
+<div class="text-center mt-4 mb-5" id="btnVolverContenedor">
+  <a href="https://uea-jose.github.io/DesarrolloAppWEB/semana8-bootstrap-js/" class="btn pastel-button btn-masculino">Volver al Inicio</a>
+</div>
+
+  <!-- Toast de confirmación -->
+  <div class="toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-4" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        ¡Formulario enviado correctamente!
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

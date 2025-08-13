@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfumería Masculina</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+    <!-- Tu archivo de estilos -->
+  <link rel="stylesheet" href="/semana8-bootstrap-js/styles.css" />
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #d0e8ff, #7fb3ff);">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Aromas & Fragancias</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPerfume">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarPerfume">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/semana8-bootstrap-js/index.html">Inicio</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="#">Perfumes</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="/semana8-bootstrap-js/pages_/Esencias.html">Esencias</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="#">Frascos</a></li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Catálogo</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/semana8-bootstrap-js/pages_/femeninos.html">Perfumería Femenina</a></li>
+              <li><a class="dropdown-item" href="/semana8-bootstrap-js/pages_/masculinos.html">Perfumería Masculina</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Buscar aroma..." />
+          <button class="btn pastel-button btn-menta" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="container mt-5">
+    <div class="descripcion text-center">
+      <h1 class="titulo-3d">Colección de Perfumes Masculinos</h1>
+      <p>
+        Explora nuestra línea exclusiva de fragancias diseñadas para resaltar el carácter, elegancia y frescura del hombre moderno.
+        Aromas intensos, notas amaderadas y frascos sofisticados que expresan personalidad en cada gota.
+      </p>
+    </div>
+
+    <div class="text-center">
+      <img src="/semana8-bootstrap-js/Images_/MASCULINOS.jpg" alt="Perfumes masculinos" class="img-fluid img-masculina" />
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/semana8-bootstrap-js/index.html" class="btn pastel-button btn-azul">Volver al Inicio</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
