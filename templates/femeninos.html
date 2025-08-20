@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfumería Femenina</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #f3c4fb, #d38eff);">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('index') }}">Aromas & Fragancias</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPerfume">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarPerfume">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('esencias') }}">Esencias</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Catálogo</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('femeninos') }}">Perfumería Femenina</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('masculinos') }}">Perfumería Masculina</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Buscar esencia..." />
+          <button class="btn pastel-button btn-rosa" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="container mt-5">
+    <div class="descripcion-femenina text-center">
+      <h1 class="titulo-3d">Colección de Perfumes Femeninos</h1>
+      <p>
+        Sumérgete en un mundo floral, dulce y sofisticado. Nuestros perfumes femeninos están pensados para resaltar la elegancia, frescura y dulzura de cada mujer.
+      </p>
+    </div>
+
+    <div class="text-center">
+      <img src="{{ url_for('static', filename='Images_/FEMENINOS.jpg') }}" 
+           alt="Perfumes femeninos" class="img-fluid img-femenina" />
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ url_for('index') }}" class="btn pastel-button btn-rosa">Volver al Inicio</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JS propio -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

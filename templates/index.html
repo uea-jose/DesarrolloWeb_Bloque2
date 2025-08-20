@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aromas & Fragancias</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous" />
+
+  <!-- Iconos Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- Estilo personalizado -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #d0e8ff, #7fb3ff);">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">Aromas & Fragancias</a>
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPerfume"
+      aria-controls="navbarPerfume" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarPerfume">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('esencias') }}">Esencias</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Catálogo</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('femeninos') }}">Perfumería Femenina</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('masculinos') }}">Perfumería Masculina</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Buscar aroma, esencia..." aria-label="Buscar">
+        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- Bienvenida -->
+<div class="container my-3 p-3 bg-light rounded shadow-sm text-center">
+  <h2 class="text-primary">Bienvenido a Aromas & Fragancias</h2>
+  <p class="text-secondary">
+    Descubre los mejores aromas y esencias para cada ocasión. Calidad y frescura garantizadas.
+  </p>
+  <a href="{{ url_for('femeninos') }}" class="pastel-button btn-menta llamativo">🌸 Explorar Catálogo</a>
+</div>
+
+<!-- Carrusel -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='Images_/carrusel1.png') }}" class="d-block w-100 img-fluid" alt="Imagen 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='Images_/carrusel2.png') }}" class="d-block w-100 img-fluid" alt="Imagen 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='Images_/carrusel3.png') }}" class="d-block w-100 img-fluid" alt="Imagen 3">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='Images_/carrusel4.png') }}" class="d-block w-100 img-fluid" alt="Imagen 4">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- Productos destacados -->
+<div class="container my-5">
+  <h3 class="mb-4 text-center text-primary">Nuestros Productos Destacados</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th>Producto</th>
+          <th>Tipo</th>
+          <th>Precio</th>
+          <th>Disponibilidad</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>212 VIP CLUP</td>
+          <td>Femenino</td>
+          <td>$15.00</td>
+          <td><span class="badge bg-success">En Stock</span></td>
+          <td>De CAROLINA HERRERA - toque fresco de jazmín y rosa, ideal para eventos festivos</td>
+        </tr>
+        <tr>
+          <td>INVICTUS</td>
+          <td>Masculino</td>
+          <td>$20.00</td>
+          <td><span class="badge bg-danger">Agotado</span></td>
+          <td>De Paco Rabanne, con notas marinas y cítricas, ideal para uso diario</td>
+        </tr>
+        <tr>
+          <td>Lady Millo Lucky</td>
+          <td>Femenino</td>
+          <td>$15.50</td>
+          <td><span class="badge bg-success">En Stock</span></td>
+          <td>De Paco Rabanne, con un toque afrutado y floral. Ideal para noches inolvidables</td>
+        </tr>
+        <tr>
+          <td>Black Code</td>
+          <td>Masculino</td>
+          <td>$17.00</td>
+          <td><span class="badge bg-warning text-dark">Pocas unidades</span></td>
+          <td>De Giorgio Armani, con toques especiados y amaderados. Ideal para la noche</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center text-white mt-5" style="background: linear-gradient(to right, #7fb3ff, #d0e8ff);">
+  <div class="container p-4 pb-0">
+    <section class="mb-4 text-center">
+      <a class="btn btn-red-social btn-facebook" href="https://facebook.com/Disprokin" target="_blank" role="button">
+        <i class="bi bi-facebook"></i> Facebook
+      </a>
+      <a class="btn btn-red-social btn-instagram" href="https://instagram.com/Disprokin" target="_blank" role="button">
+        <i class="bi bi-instagram"></i> Instagram
+      </a>
+      <a class="btn btn-red-social btn-tiktok" href="https://tiktok.com/@Disprokin" target="_blank" role="button">
+        <i class="bi bi-tiktok"></i> TikTok
+      </a>
+    </section>
+  </div>
+  <div class="text-center p-3 text-dark bg-light" style="font-size: 0.9rem;">
+    © 2025 Disprokin. Todos los derechos reservados. | Desarrollado por Dispro
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<!-- Tu script personalizado -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+semana8-bootstrap-js/
+│── app.py
+│── static/
+│   ├── styles.css       ← tu CSS
+│   ├── script.js        ← tu JS
+│   └── Images_/         ← aquí va tu carpeta con imágenes
+        ├── carrusel1.png
+        ├── carrusel2.png
+        ├── carrusel3.png
+        └── carrusel4.png
+│
+│── templates/
+    ├── index.html
+    ├── contacto.html
+    ├── Esencias.html
+    ├── femeninos.html
+    ├── masculinos.html
