@@ -22,14 +22,14 @@
     <div class="collapse navbar-collapse" id="navbarPerfumeMenu">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu-perfume">
         <li class="nav-item"><a class="nav-link link-perfume" href="{{ url_for('index') }}">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link link-perfume" href="{{ url_for('esencias') }}">Esencias</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle link-perfume" href="#" data-bs-toggle="dropdown">Catálogo</a>
           <ul class="dropdown-menu dropdown-perfume">
             <li><a class="dropdown-item item-perfume" href="{{ url_for('femeninos') }}">Perfumería Femenina</a></li>
             <li><a class="dropdown-item item-perfume" href="{{ url_for('masculinos') }}">Perfumería Masculina</a></li>
           </ul>
-        </li>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
       </ul>
 
       <form class="d-flex search-perfume">

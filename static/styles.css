@@ -639,48 +639,50 @@ body.femenina {
 
 /* Estilo pastel degradado cálido para NATVAR CONTACTO */
 /* Estilo NATVAR CONTACTO con azul rey -> piedra kawaii */
-/* Estilo NATVAR CONTACTO */
+
+/* Estilo CONTACTO KAWAII */
+/* Estilo CONTACTO KAWAII */
 .navbar-contacto {
-  background: linear-gradient(to right, #0077b6, #0096c7, #e5e7eb); /* azul rey -> azul cyan -> piedra claro */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-  font-family: 'Playfair Display', serif; /* Estilo elegante similar a tu ejemplo */
+  background: linear-gradient(to right, #ffd6e0, #c9f0ff); /* rosita pastel -> celeste pastel */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Playfair Display', serif;
 }
 
 /* Marca */
 .navbar-contacto .navbar-brand {
   font-weight: bold;
   font-size: 1.5rem;
-  color: #023e8a !important; /* azul profundo */
+  color: #4b3f72 !important; /* morado suave */
   letter-spacing: 1px;
 }
 
 /* Links */
 .navbar-contacto .nav-link {
-  color: #023e8a !important;
+  color: #4b3f72 !important;
   font-weight: 500;
   font-size: 1.05rem;
   transition: color 0.3s ease;
 }
 .navbar-contacto .nav-link:hover {
-  color: #0096c7 !important; /* azul cyan brillante */
+  color: #ff85a2 !important; /* rosita medio */
 }
 .navbar-contacto .nav-link.active {
-  color: #0077b6 !important;
+  color: #ff4f81 !important; /* fucsia pastel */
   font-weight: bold;
 }
 
 /* Dropdown */
 .navbar-contacto .dropdown-menu {
-  background-color: #f9fafb;
+  background-color: #fff0f6; /* rosita claro */
 }
 .navbar-contacto .dropdown-item:hover {
-  background-color: #e0f2fe;
-  color: #0077b6;
+  background-color: #ffe0ec;
+  color: #ff4f81;
 }
 
 /* Botón buscar */
 .btn-contacto {
-  background: #0077b6;
+  background: #ff85a2; /* rosita medio */
   color: white;
   border: none;
   border-radius: 25px;
@@ -689,6 +691,6 @@ body.femenina {
   transition: 0.3s ease;
 }
 .btn-contacto:hover {
-  background: #0096c7;
-  color: #f9fafb;
+  background: #ff4f81; /* fucsia pastel */
+  color: #fff0f6;
 }
