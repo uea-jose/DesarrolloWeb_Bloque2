@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container my-4 p-4 bg-light rounded shadow-sm">
   <h2 class="text-primary text-center mb-4">Formulario de Registro</h2>
-  
+
   <form method="POST" class="mx-auto" style="max-width: 400px;">
     <div class="mb-3">
       <label for="username" class="form-label">Usuario</label>
@@ -16,5 +16,12 @@
     </div>
     <button type="submit" class="btn btn-primary w-100">Registrarse</button>
   </form>
+
+  <div class="text-center mt-3">
+    <p class="text-secondary">O escríbenos directamente a:</p>
+    <a href="mailto:info@institutotecnico.com" class="btn btn-outline-primary btn-sm">
+      <i class="bi bi-envelope-fill"></i> info@institutotecnico.com
+    </a>
+  </div>
 </div>
 {% endblock %}

@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}Disprokin{% endblock %}</title>
+  <title>{% block title %}Instituto Técnico{% endblock %}</title>
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-    crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
   <!-- Iconos Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -18,25 +16,27 @@
 </head>
 <body>
 
+<!-- Barra de noticias -->
+<div class="top-bar text-white py-1 px-3">
+  <span class="news-label">Noticias:</span>
+  <span class="news-content">Nuevos cursos de Redes Avanzadas disponibles</span>
+</div>
+
 <!-- Navbar -->
 <!-- Navbar -->
 <nav class="navbar navbar-expand navbar-wordpress">
   <div class="container-fluid">
-    <!-- Logo / Marca -->
-    <a class="navbar-brand fw-bold text-dark" href="{{ url_for('index') }}">Welcome</a>
 
-    <!-- Links horizontales siempre visibles -->
+    <a class="navbar-brand fw-bold instituto-tecnico" href="{{ url_for('index') }}">
+      Instituto Técnico
+    </a>
     <ul class="navbar-nav ms-3 me-auto mb-2 mb-lg-0 d-flex flex-row">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('about') }}">Acerca de</a>
-      </li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">Sobre Nosotros</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a></li>
     </ul>
   </div>
 </nav>
-
 
 
 <!-- CONTENIDO VARIABLE -->
@@ -45,30 +45,26 @@
 </main>
 
 <!-- Footer -->
-<footer class="text-center text-white mt-5" style="background: linear-gradient(to right, #7fb3ff, #d0e8ff);">
+<footer class="text-center text-white mt-5" style="background: linear-gradient(to right, #1d2d50, #0077b6);">
   <div class="container p-4 pb-0">
     <section class="mb-4 text-center">
-      <a class="btn btn-red-social btn-facebook" href="https://facebook.com/Disprokin" target="_blank">
+      <a class="btn btn-red-social btn-facebook" href="#" target="_blank">
         <i class="bi bi-facebook"></i> Facebook
       </a>
-      <a class="btn btn-red-social btn-instagram" href="https://instagram.com/Disprokin" target="_blank">
+      <a class="btn btn-red-social btn-instagram" href="#" target="_blank">
         <i class="bi bi-instagram"></i> Instagram
       </a>
-      <a class="btn btn-red-social btn-tiktok" href="https://tiktok.com/@Disprokin" target="_blank">
+      <a class="btn btn-red-social btn-tiktok" href="#" target="_blank">
         <i class="bi bi-tiktok"></i> TikTok
       </a>
     </section>
   </div>
   <div class="text-center p-3 text-dark bg-light" style="font-size: 0.9rem;">
-    © 2025 Disprokin. Todos los derechos reservados. | Desarrollado por Dispro
+    © 2025 Instituto Técnico. Todos los derechos reservados.
   </div>
 </footer>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
-
 </html>

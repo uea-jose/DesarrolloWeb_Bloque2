@@ -1,11 +1,27 @@
 {% extends "base.html" %}
-{% block title %}Acerca de{% endblock %}
+{% block title %}Sobre Nosotros{% endblock %}
 
 {% block content %}
-<div class="container my-5">
-  <h2 class="text-primary">Sobre Nosotros</h2>
-  <p class="text-secondary">
-    Somos apasionados por la perfumería, ofrecemos esencias únicas y exclusivas para cada gusto.
+<div class="container my-5 p-4 bg-light rounded shadow-sm">
+  <h2 class="text-primary mb-3 text-center">Sobre el Instituto Técnico</h2>
+  <p class="text-secondary text-center">
+    Somos una institución dedicada a la <strong>formación en cursos técnicos</strong> de
+    seguridad, electricidad y redes. Nuestro objetivo es capacitar a profesionales listos
+    para enfrentar los retos tecnológicos de hoy.
   </p>
+  <div class="row text-center mt-4">
+    <div class="col-md-4">
+      <i class="bi bi-mortarboard-fill text-primary" style="font-size: 2rem;"></i>
+      <p class="mt-2">Más de 500 estudiantes formados</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-tools text-primary" style="font-size: 2rem;"></i>
+      <p class="mt-2">Metodología práctica y aplicada</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-award-fill text-primary" style="font-size: 2rem;"></i>
+      <p class="mt-2">Certificación reconocida</p>
+    </div>
+  </div>
 </div>
 {% endblock %}

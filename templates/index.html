@@ -1,13 +1,19 @@
 {% extends "base.html" %}
-{% block title %}Inicio{% endblock %}
+{% block title %}Inicio - Cursos Técnicos{% endblock %}
 
 {% block content %}
-<div class="container my-3 p-3 bg-light rounded shadow-sm text-center">
-  <h2 class="text-primary">Disprokin</h2>
-  <p class="text-secondary">
-    Descubre los mejores aromas y esencias para cada ocasión. Calidad y frescura garantizadas.
-  </p>
-  <!-- Botón que lleva a contacto -->
-  <a href="{{ url_for('contacto') }}" class="pastel-button btn-menta llamativo">📩 Ir a Contacto</a>
-</div>
+<div class="container my-4">
+  <!-- Banner Rebajas -->
+  <div class="banner-rebajas rounded shadow-sm mb-4">
+    ¡REBAJAS en Cursos Técnicos! <small>Inscríbete antes de fin de mes</small>
+  </div>
+
+  <!-- Bienvenida -->
+  <div class="p-4 bg-light rounded shadow-sm text-center mb-4">
+    <h2 class="text-primary">Bienvenido al Instituto Técnico</h2>
+    <p class="text-secondary">
+      Ofrecemos cursos prácticos en <strong>tecnología y seguridad</strong> para tu futuro profesional.
+    </p>
+  </div>
+
 {% endblock %}

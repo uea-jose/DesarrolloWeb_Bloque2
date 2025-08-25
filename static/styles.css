@@ -1,110 +1,176 @@
-/* ===========================
-   Estilo global
-=========================== */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #e9edf2; /* Gris azulado claro */
-    margin: 0;
-    padding: 0;
-    color: #2c3e50; /* Texto gris oscuro */
+/* -------------------
+   COLORES BASE
+------------------- */
+:root {
+    --azul-oscuro: #1d2d50;   /* Fondo principal */
+    --azul-claro: #00a8e8;    /* Acento tecnológico */
+    --naranja: #ff7f11;       /* Contraste vibrante */
+    --blanco: #ffffff;        /* Texto principal */
+    --rojo: #e63946;          /* Alertas / error */
+    --dorado: #f9d423;        /* Elegancia y resalte */
+    --plateado: #dfe6e9;      /* Sofisticado y sobrio */
+    --gris-claro: #f2f2f2;    /* Fondos suaves */
 }
 
-/* ===========================
-   Header superior (logo + título)
-=========================== */
-.header-top {
-    background-color: #1a2b4c; /* Azul gris oscuro */
-    color: white;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
+/* -------------------
+   BARRA SUPERIOR
+------------------- */
+.top-bar {
+    background-color: var(--azul-claro);
+    color: var(--blanco);
+    padding: 5px 20px;
+    font-size: 14px;
 }
-
-.header-top .logo {
-    height: 40px;
+.top-bar .news-label {
+    font-weight: bold;
+    color: var(--naranja); /* Etiqueta Noticias en naranja */
     margin-right: 10px;
 }
 
-.header-top .site-title {
-    font-size: 1.3rem;
-    margin: 0;
-    font-weight: bold;
-    color: white;
-}
-
-.header-top .site-subtitle {
-    font-size: 0.9rem;
-    margin-left: 10px;
-    color: #b0bec5; /* Gris claro */
-}
-
-/* ===========================
-   Navbar principal (azul-gris)
-=========================== */
-.navbar-wordpress {
-    background-color: #f0f3f7; /* Azul gris muy claro */
-    border-bottom: 1px solid #cfd8dc;
-}
-
-.navbar-wordpress .nav-link {
-    color: #34495e;
-    font-weight: 500;
-    padding: 10px 15px;
-    transition: all 0.3s ease;
-}
-
-.navbar-wordpress .nav-link:hover {
-    background-color: #dbe3eb; /* Azul gris hover */
-    border-radius: 4px;
-    color: #0d2c6c;
-}
-
-.navbar-wordpress .nav-link.active {
-    background-color: #0d47a1; /* Azul fuerte para activo */
-    color: #fff !important;
-    border-radius: 4px;
-}
-
-/* ===========================
-   Botones personalizados
-=========================== */
-.pastel-button {
-    display: inline-block;
+/* -------------------
+   NAVBAR PRINCIPAL
+------------------- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--azul-oscuro);
     padding: 10px 20px;
-    border-radius: 25px;
+    color: var(--blanco);
+}
+.logo h1 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--blanco);
+}
+.logo p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--gris-claro);
+}
+.menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    position: relative;
+}
+.menu li a {
+    display: block;
+    padding: 10px 15px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    color: var(--blanco);
+    transition: 0.3s;
+}
+.menu li a:hover {
+    background-color: var(--azul-claro);
+    color: var(--blanco);
+    border-radius: 4px;
+}
+
+/* -------------------
+   SUBMENÚ
+------------------- */
+.submenu {
+    display: none;
+    position: absolute;
+    background: var(--azul-oscuro);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+}
+.submenu li a {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    color: var(--blanco);
+}
+.dropdown:hover .submenu {
+    display: block;
+}
+
+/* -------------------
+   BUSCADOR
+------------------- */
+.search-box {
+    display: flex;
+    align-items: center;
+}
+.search-box input {
+    padding: 5px;
+    border: 1px solid var(--gris-claro);
+    border-radius: 4px 0 0 4px;
+}
+.search-box button {
+    padding: 6px 10px;
+    border: none;
+    background: var(--azul-claro);
+    color: var(--blanco);
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+.search-box button:hover {
+    background: var(--naranja);
+}
+
+/* -------------------
+   CONTENIDO PRINCIPAL
+------------------- */
+main {
+    padding: 20px;
+    background-color: var(--blanco);
+    color: var(--plateado); /* antes --negro */
+}
+
+/* -------------------
+   SIDEBAR
+------------------- */
+.sidebar {
+    background-color: var(--gris-claro);
+    padding: 15px;
+    color: var(--plateado); /* antes --negro */
+    font-size: 14px;
+}
+
+/* -------------------
+   BANNER ESPECIAL
+------------------- */
+.banner-rebajas {
+    background-color: var(--rojo);
+    color: var(--blanco);
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
     font-weight: bold;
 }
-
-.btn-menta {
-    background: #607d8b; /* Gris azulado */
-    color: white;
+.banner-rebajas small {
+    color: var(--plateado); /* antes --negro */
+    font-size: 14px;
 }
 
-.btn-menta:hover {
-    background: #455a64; /* Más oscuro */
-    color: white;
-}
-
-/* ===========================
-   Footer degradado
-=========================== */
+/* -------------------
+   FOOTER
+------------------- */
 footer {
+    background: var(--azul-oscuro);
+    color: var(--blanco);
     text-align: center;
-    background: linear-gradient(to right, #1a2b4c, #34495e); /* Azul-gris degradado */
-    color: white;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 15px;
+}
+/* Estilo exclusivo para "Instituto Técnico" */
+.instituto-tecnico {
+    color: var(--plateado); /* Sobrio y serio */
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.25);
+    transition: color 0.3s ease;
 }
 
-footer a {
-    color: #bbdefb; /* Azul suave */
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-footer a:hover {
-    text-decoration: underline;
-    color: #ffffff;
+.instituto-tecnico:hover {
+    color: var(--azul-claro); /* Sutil resalte tecnológico */
 }
