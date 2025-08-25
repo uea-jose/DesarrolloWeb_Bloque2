@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="container my-3 p-3 bg-light rounded shadow-sm text-center">
+  <h2 class="text-primary">Bienvenido a Aromas & Fragancias</h2>
+  <p class="text-secondary">
+    Descubre los mejores aromas y esencias para cada ocasión. Calidad y frescura garantizadas.
+  </p>
+  <!-- Botón que lleva a contacto -->
+  <a href="{{ url_for('contacto') }}" class="pastel-button btn-menta llamativo">📩 Ir a Contacto</a>
+</div>
+{% endblock %}

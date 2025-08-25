@@ -1,0 +1,110 @@
+/* ===========================
+   Estilo global
+=========================== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9edf2; /* Gris azulado claro */
+    margin: 0;
+    padding: 0;
+    color: #2c3e50; /* Texto gris oscuro */
+}
+
+/* ===========================
+   Header superior (logo + título)
+=========================== */
+.header-top {
+    background-color: #1a2b4c; /* Azul gris oscuro */
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header-top .logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.header-top .site-title {
+    font-size: 1.3rem;
+    margin: 0;
+    font-weight: bold;
+    color: white;
+}
+
+.header-top .site-subtitle {
+    font-size: 0.9rem;
+    margin-left: 10px;
+    color: #b0bec5; /* Gris claro */
+}
+
+/* ===========================
+   Navbar principal (azul-gris)
+=========================== */
+.navbar-wordpress {
+    background-color: #f0f3f7; /* Azul gris muy claro */
+    border-bottom: 1px solid #cfd8dc;
+}
+
+.navbar-wordpress .nav-link {
+    color: #34495e;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.navbar-wordpress .nav-link:hover {
+    background-color: #dbe3eb; /* Azul gris hover */
+    border-radius: 4px;
+    color: #0d2c6c;
+}
+
+.navbar-wordpress .nav-link.active {
+    background-color: #0d47a1; /* Azul fuerte para activo */
+    color: #fff !important;
+    border-radius: 4px;
+}
+
+/* ===========================
+   Botones personalizados
+=========================== */
+.pastel-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-menta {
+    background: #607d8b; /* Gris azulado */
+    color: white;
+}
+
+.btn-menta:hover {
+    background: #455a64; /* Más oscuro */
+    color: white;
+}
+
+/* ===========================
+   Footer degradado
+=========================== */
+footer {
+    text-align: center;
+    background: linear-gradient(to right, #1a2b4c, #34495e); /* Azul-gris degradado */
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #bbdefb; /* Azul suave */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
