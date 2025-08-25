@@ -2,14 +2,14 @@
    COLORES BASE
 ------------------- */
 :root {
-    --azul-oscuro: #1d2d50;   /* Fondo principal */
-    --azul-claro: #00a8e8;    /* Acento tecnológico */
-    --naranja: #ff7f11;       /* Contraste vibrante */
-    --blanco: #ffffff;        /* Texto principal */
-    --rojo: #e63946;          /* Alertas / error */
-    --dorado: #f9d423;        /* Elegancia y resalte */
-    --plateado: #dfe6e9;      /* Sofisticado y sobrio */
-    --gris-claro: #f2f2f2;    /* Fondos suaves */
+    --azul-oscuro: #1d2d50;  
+    --azul-claro: #00a8e8;   
+    --naranja: #ff7f11;     
+    --blanco: #ffffff;        
+    --rojo: #e63946;        
+    --dorado: #f9d423;      
+    --plateado: #dfe6e9;      
+    --gris-claro: #f2f2f2;   
 }
 
 /* -------------------
@@ -20,10 +20,13 @@
     color: var(--blanco);
     padding: 5px 20px;
     font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 .top-bar .news-label {
     font-weight: bold;
-    color: var(--naranja); /* Etiqueta Noticias en naranja */
+    color: var(--naranja); 
     margin-right: 10px;
 }
 
@@ -37,6 +40,7 @@
     background-color: var(--azul-oscuro);
     padding: 10px 20px;
     color: var(--blanco);
+    flex-wrap: wrap;
 }
 .logo h1 {
     margin: 0;
@@ -70,9 +74,7 @@
     border-radius: 4px;
 }
 
-/* -------------------
-   SUBMENÚ
-------------------- */
+/* Submenú */
 .submenu {
     display: none;
     position: absolute;
@@ -99,6 +101,7 @@
 .search-box {
     display: flex;
     align-items: center;
+    margin-left: 20px;
 }
 .search-box input {
     padding: 5px;
@@ -123,7 +126,7 @@
 main {
     padding: 20px;
     background-color: var(--blanco);
-    color: var(--plateado); /* antes --negro */
+    color: var(--plateado);
 }
 
 /* -------------------
@@ -132,7 +135,7 @@ main {
 .sidebar {
     background-color: var(--gris-claro);
     padding: 15px;
-    color: var(--plateado); /* antes --negro */
+    color: var(--plateado);
     font-size: 14px;
 }
 
@@ -148,7 +151,7 @@ main {
     font-weight: bold;
 }
 .banner-rebajas small {
-    color: var(--plateado); /* antes --negro */
+    color: var(--plateado);
     font-size: 14px;
 }
 
@@ -161,16 +164,65 @@ footer {
     text-align: center;
     padding: 15px;
 }
-/* Estilo exclusivo para "Instituto Técnico" */
+
+/* -------------------
+   Instituto Técnico
+------------------- */
 .instituto-tecnico {
-    color: var(--plateado); /* Sobrio y serio */
+    color: var(--plateado);
     font-size: 20px;
     font-weight: 500;
     letter-spacing: 0.5px;
     text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.25);
     transition: color 0.3s ease;
 }
-
 .instituto-tecnico:hover {
-    color: var(--azul-claro); /* Sutil resalte tecnológico */
+    color: var(--azul-claro);
+}
+
+/* -------------------
+   RESPONSIVE
+------------------- */
+@media (max-width: 1024px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .menu {
+        flex-direction: column;
+        width: 100%;
+    }
+    .menu li a {
+        padding: 10px;
+    }
+    .search-box {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .menu li a {
+        width: 100%;
+    }
+    .submenu {
+        position: relative;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+    }
+    .search-box {
+        flex-direction: column;
+        width: 100%;
+    }
+    .search-box input, .search-box button {
+        width: 100%;
+        border-radius: 4px;
+        margin: 2px 0;
+    }
 }
