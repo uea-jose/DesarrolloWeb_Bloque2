@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Productos{% endblock %}
+{% block content %}
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="text-primary">Inventario de Perfumes</h2>
+    <a href="{{ url_for('main.productos_create') }}" class="btn btn-success">+ Ingresar producto</a>
+  </div>
+
+  <form class="row g-2 mb-3" method="get" action="{{ url_for('main.productos_list') }}">
+    <div class="col-auto">
+      <input type="text" class="form-control" name="q" placeholder="Buscar por nombre o tipo" value="{{ q or '' }}">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-outline-primary" type="submit">Buscar</button>
+      <a class="btn btn-outline-secondary" href="{{ url_for('main.productos_list') }}">Limpiar</a>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle bg-white rounded shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>Producto</th>
+          <th>Tipo</th>
+          <th class="text-end">Precio</th>
+          <th class="text-center">Disponibilidad</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for p in productos %}
+        <tr>
+          <td>{{ p['nombre'] }}</td>
+          <td>{{ p['tipo'] }}</td>
+          <td class="text-end">${{ '%.2f'|format(p['precio']) }}</td>
+          <td class="text-center">
+            {% set s = p['stock']|int %}
+            {% if s <= 0 %}
+              <span class="badge bg-danger">Agotado</span>
+            {% elif s <= 10 %}
+              <span class="badge bg-warning text-dark">Pocas unidades</span>
+            {% else %}
+              <span class="badge bg-success">En stock</span>
+            {% endif %}
+            <small class="text-muted">({{ s }})</small>
+          </td>
+          <td class="text-center">
+            <a class="btn btn-sm btn-primary" href="{{ url_for('main.productos_edit', pid=p['id']) }}">Editar</a>
+            <form class="d-inline" method="post"
+                  action="{{ url_for('main.productos_delete', pid=p['id']) }}"
+                  onsubmit="return confirm('¿Eliminar este producto?');">
+              <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="text-center text-muted py-4">Sin productos por ahora.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

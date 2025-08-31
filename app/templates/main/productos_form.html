@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Nuevo' if modo=='crear' else 'Editar' }} Producto{% endblock %}
+{% block content %}
+<div class="container my-4">
+  <h2 class="mb-3">{{ 'Ingresar' if modo=='crear' else 'Editar' }} producto</h2>
+  <form method="post" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nombre</label>
+      <input name="nombre" class="form-control" required value="{{ (prod['nombre'] if prod else '') }}">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Tipo</label>
+      <select name="tipo" class="form-select" required>
+        {% set val = (prod['tipo'] if prod else 'Femenino') %}
+        {% for t in ['Femenino','Masculino','Unisex'] %}
+          <option value="{{t}}" {{ 'selected' if t==val else '' }}>{{t}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Precio (USD)</label>
+      <input type="number" step="0.01" min="0" name="precio" class="form-control"
+             required value="{{ (prod['precio'] if prod else '') }}">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Stock</label>
+      <input type="number" min="0" name="stock" class="form-control"
+             required value="{{ (prod['stock'] if prod else 0) }}">
+    </div>
+    <div class="col-12 d-flex gap-2">
+      <button class="btn btn-primary" type="submit">{{ 'Guardar' if modo=='crear' else 'Actualizar' }}</button>
+      <a class="btn btn-secondary" href="{{ url_for('main.productos_list') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

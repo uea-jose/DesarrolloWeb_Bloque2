@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Esencias Naturales{% endblock %}
+{% block content %}
+
+<div class="banner-esencias text-center">
+  <img src="{{ url_for('static', filename='Images_/escencias_arriba.png') }}"
+       alt="Encabezado Esencias" class="img-fluid banner-img" />
+  <p class="h2 main-title mt-3">Esencias Naturales</p>
+</div>
+
+<div class="container mt-4 contenedor-esencias text-center">
+  <p class="lead">Nuestras esencias están elaboradas con ingredientes puros y aromas originales</p>
+</div>
+
+<div class="container contenedor-esencia-imagen text-center mt-4">
+  <img src="{{ url_for('static', filename='Images_/escencias.jpg') }}"
+       alt="Esencias" class="img-fluid img-esencias-sola" />
+</div>
+
+<div class="text-center mt-4 mb-5">
+  <a href="{{ url_for('main.index') }}" class="btn pastel-button btn-durazno">Volver al Inicio</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Perfumería Femenina{% endblock %}
+{% block content %}
+
+<div class="container mt-5 content-box">
+  <div class="descripcion-femenina text-center">
+    <h1 class="titulo-3d">Colección de Perfumes Femeninos</h1>
+    <p>Sumérgete en un mundo floral, dulce y sofisticado. Nuestros perfumes femeninos están pensados para resaltar la elegancia, frescura y dulzura de cada mujer.</p>
+  </div>
+
+  <div class="text-center">
+    <img src="{{ url_for('static', filename='Images_/FEMENINOS.jpg') }}"
+         alt="Perfumes femeninos" class="img-fluid img-femenina" />
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('main.index') }}" class="btn pastel-button btn-rosa">Volver al Inicio</a>
+  </div>
+</div>
+
+{% endblock %}
