@@ -7,8 +7,13 @@ main = Blueprint('main', __name__)
 # --------- Páginas existentes ---------
 @main.route('/')
 def index():
-    return render_template('main/index.html')
-
+    conn = get_conn(); cur = conn.cursor()
+    try:
+        cur.execute("SELECT * FROM productos ORDER BY stock DESC, id DESC LIMIT 4")
+        productos_destacados = cur.fetchall()
+    finally:
+        conn.close()
+    return render_template('main/index.html', productos_destacados=productos_destacados)
 @main.route('/esencias')
 def esencias():
     return render_template('main/esencias.html')

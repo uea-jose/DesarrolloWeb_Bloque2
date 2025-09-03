@@ -53,49 +53,17 @@
     </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover align-middle">
-      <thead class="table-primary">
-        <tr>
-          <th>Producto</th>
-          <th>Tipo</th>
-          <th>Precio</th>
-          <th>Disponibilidad</th>
-          <th>Descripción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>212 VIP CLUB</td>
-          <td>Femenino</td>
-          <td>$15.00</td>
-          <td><span class="badge bg-success">En Stock</span></td>
-          <td>De Carolina Herrera - toque fresco de jazmín y rosa, ideal para eventos festivos</td>
-        </tr>
-        <tr>
-          <td>INVICTUS</td>
-          <td>Masculino</td>
-          <td>$20.00</td>
-          <td><span class="badge bg-danger">Agotado</span></td>
-          <td>De Paco Rabanne, con notas marinas y cítricas, ideal para uso diario</td>
-        </tr>
-        <tr>
-          <td>Lady Million Lucky</td>
-          <td>Femenino</td>
-          <td>$15.50</td>
-          <td><span class="badge bg-success">En Stock</span></td>
-          <td>De Paco Rabanne, con un toque afrutado y floral. Ideal para noches inolvidables</td>
-        </tr>
-        <tr>
-          <td>Black Code</td>
-          <td>Masculino</td>
-          <td>$17.00</td>
-          <td><span class="badge bg-warning text-dark">Pocas unidades</span></td>
-          <td>De Giorgio Armani, con toques especiados y amaderados. Ideal para la noche</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  {% set heading = ' ' %}
+  {% set show_create = false %}
+  {% set show_search = false %}
+  {% set show_actions = false %}
+  {% set bordered = true %}
+
+  {% if productos is not defined and productos_destacados is defined %}
+    {% set productos = productos_destacados %}
+  {% endif %}
+
+  {% include "_productos_table.html" %}
 </div>
 
 {% endblock %}

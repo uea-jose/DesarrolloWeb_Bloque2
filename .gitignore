@@ -1,31 +1,9 @@
-﻿@"
-# Entorno virtual
 venv/
-ENV/
 .env
-
-# Archivos compilados Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Base de datos local
-*.db
-*.sqlite3
-
-# Logs
-*.log
-
-# Configuración local
-*.cfg
-*.ini
-
-# VSCode / PyCharm
-.vscode/
-.idea/
-
-# Archivos de sistema
 .DS_Store
 Thumbs.db
-"@ | Out-File -FilePath .gitignore -Encoding utf8
+*.log
