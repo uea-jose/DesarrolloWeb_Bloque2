@@ -1,11 +1,20 @@
-# package marker
 # app/main/__init__.py
 from flask import Blueprint
 from .db import init_db
 
-main_bp = Blueprint("main", __name__, template_folder="../../templates/main", static_folder="../../static")
+main_bp = Blueprint(
+    "main", __name__,
+    # ⬇️ Cambia esto: que apunte a /templates, no /templates/main
+    template_folder="../../templates",
+    static_folder="../../static"
+)
 
-# Inicializa la BD al importar el blueprint (primer arranque del servidor)
+# Alias opcional
+main = main_bp
+
+# Inicializa la BD
 init_db()
 
-from . import routes  # noqa
+# Importa rutas
+from . import routes
+from . import usuarios_routes

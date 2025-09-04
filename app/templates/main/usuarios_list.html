@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+  <!-- Encabezado con 3 zonas: izquierda / centro / derecha -->
+  <div class="row align-items-center mb-3 g-2">
+    <!-- Izquierda: Panel rápido -->
+    <div class="col-12 col-md-auto order-2 order-md-1">
+      <a class="btn btn-quickpanel btn-sm"
+         data-bs-toggle="offcanvas" href="#adminDrawerUsers" role="button"
+         aria-controls="adminDrawerUsers">
+        <i class="bi bi-ui-sidebar"></i> Panel rápido
+      </a>
+    </div>
+
+    <!-- Centro: Título centrado -->
+    <div class="col-12 col-md order-1 order-md-2 text-center">
+      <h1 class="h4 m-0">Usuarios registrados</h1>
+    </div>
+
+    <!-- Derecha: acciones -->
+    <div class="col-12 col-md-auto order-3 text-md-end">
+      <div class="d-flex gap-2 flex-wrap justify-content-md-end">
+        <a class="btn btn-outline-secondary" href="{{ url_for('main.index') }}">
+          <i class="bi bi-arrow-left"></i> Volver
+        </a>
+        <a class="btn btn-primary" href="{{ url_for('main.registrarse') }}">
+          <i class="bi bi-person-plus"></i> Registrar
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {% if usuarios %}
+  <div class="table-responsive">
+    <table class="table table-hover align-middle bg-white shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Edad</th>
+          <th>Provincia</th>
+          <th>Ciudad</th>
+          <th>Creado</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in usuarios %}
+        <tr>
+          <td>{{ u.id }}</td>
+          <td>{{ u.nombre }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.edad }}</td>
+          <td>{{ u.provincia or '—' }}</td>
+          <td>{{ u.ciudad or '—' }}</td>
+          <td>{{ u.creado_en }}</td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-outline-primary"
+               href="{{ url_for('main.usuario_edit', uid=u.id) }}">
+              <i class="bi bi-pencil-square"></i> Editar
+            </a>
+            <form class="d-inline" method="post"
+                  action="{{ url_for('main.usuario_delete', uid=u.id) }}"
+                  onsubmit="return confirm('¿Eliminar al usuario {{ u.nombre }}?');">
+              <button class="btn btn-sm btn-outline-danger" type="submit">
+                <i class="bi bi-trash"></i> Eliminar
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="alert alert-secondary">Aún no hay usuarios.</div>
+  {% endif %}
+</div>
+
+<!-- Offcanvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="adminDrawerUsers" aria-labelledby="adminDrawerUsersLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="adminDrawerUsersLabel">Panel rápido</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="mb-3">Accesos directos a <strong>Inicio</strong> y <strong>Productos</strong>.</p>
+    <div class="dropdown mt-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button"
+              id="adminMenuUsers" data-bs-toggle="dropdown" aria-expanded="false">
+        Acciones rápidas
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="adminMenuUsers">
+        <li>
+          <a class="dropdown-item" href="{{ url_for('main.index') }}">
+            <i class="bi bi-house"></i> Inicio
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="{{ url_for('main.productos_list') }}">
+            <i class="bi bi-box-seam"></i> Productos
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Cierra el offcanvas al elegir una acción
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#adminDrawerUsers .dropdown-item')) {
+      const el = document.getElementById('adminDrawerUsers');
+      const drawer = bootstrap.Offcanvas.getInstance(el);
+      if (drawer) drawer.hide();
+    }
+  });
+</script>
+{% endblock %}

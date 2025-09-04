@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Editar usuario{% endblock %}
+{% block content %}
+<div class="container my-4" style="max-width: 820px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="h5 mb-3">Editar usuario</h1>
+      <form method="post" novalidate>
+        <div class="form-floating mb-3">
+          <input class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="{{ u.nombre }}" required>
+          <label for="nombre">Nombre</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="email" name="email" type="email" placeholder="Email" value="{{ u.email }}" required>
+          <label for="email">Email</label>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-sm-4">
+            <div class="form-floating">
+              <input class="form-control" id="edad" name="edad" type="number" min="0" placeholder="Edad"
+                     value="{{ u.edad }}" required>
+              <label for="edad">Edad</label>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-floating">
+              <select class="form-select" id="provincia" name="provincia" required>
+                <option value="" disabled>Seleccione...</option>
+              </select>
+              <label for="provincia">Provincia</label>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-floating">
+              <select class="form-select" id="ciudad" name="ciudad" required>
+                <option value="" disabled>Seleccione...</option>
+              </select>
+              <label for="ciudad">Ciudad</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+          <button class="btn btn-primary" type="submit">
+            <i class="bi bi-save"></i> Guardar cambios
+          </button>
+          <a class="btn btn-outline-secondary" href="{{ url_for('main.usuarios') }}">
+            <i class="bi bi-arrow-left"></i> Cancelar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+/* Provincias/Ciudades Ecuador (resumen; amplía si quieres) */
+const ec = {
+  "Pichincha": ["Quito", "Cayambe", "Rumiñahui"],
+  "Guayas": ["Guayaquil", "Daule", "Samborondón"],
+  "Azuay": ["Cuenca", "Gualaceo", "Paute"],
+  "Manabí": ["Portoviejo", "Manta", "Chone"],
+  "El Oro": ["Machala", "Pasaje", "Santa Rosa"]
+};
+
+const selProv = document.getElementById('provincia');
+const selCiu  = document.getElementById('ciudad');
+const curProv = "{{ u.provincia or '' }}";
+const curCiu  = "{{ u.ciudad or '' }}";
+
+function fillProvinces() {
+  selProv.innerHTML = '<option value="" disabled>Seleccione...</option>';
+  for (const p of Object.keys(ec)) {
+    const opt = document.createElement('option');
+    opt.value = opt.textContent = p;
+    if (p === curProv) opt.selected = true;
+    selProv.appendChild(opt);
+  }
+}
+
+function fillCities(prov) {
+  selCiu.innerHTML = '<option value="" disabled>Seleccione...</option>';
+  (ec[prov] || []).forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = opt.textContent = c;
+    if (c === curCiu) opt.selected = true;
+    selCiu.appendChild(opt);
+  });
+}
+
+selProv.addEventListener('change', () => fillCities(selProv.value));
+fillProvinces();
+fillCities(curProv || Object.keys(ec)[0]);
+</script>
+{% endblock %}
+{% endblock %}

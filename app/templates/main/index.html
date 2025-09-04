@@ -43,59 +43,37 @@
 
 <!-- Productos destacados (caja 800px) -->
 <div class="container my-5 content-box">
-
   <!-- Header con botones a CRUD -->
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="m-0 text-primary">Nuestros Productos Destacados</h3>
+    <h3 class="m-0 text-primary">Nuestros Productos + Destacados</h3>
     <div class="d-flex gap-2">
       <a class="btn btn-success" href="{{ url_for('main.productos_create') }}">+ Ingresar producto</a>
       <a class="btn btn-outline-primary" href="{{ url_for('main.productos_list') }}">Gestionar productos</a>
+
+      <!-- ✅ Botón que abre el Offcanvas GLOBAL de base.html -->
+      <a class="btn btn-primary"
+         data-bs-toggle="offcanvas"
+         data-bs-target="#adminMenu"
+         role="button"
+         aria-controls="adminMenu">
+        Panel rápido
+      </a>
     </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover align-middle">
-      <thead class="table-primary">
-        <tr>
-          <th>Producto</th>
-          <th>Tipo</th>
-          <th>Precio</th>
-          <th>Disponibilidad</th>
-          <th>Descripción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>212 VIP CLUB</td>
-          <td>Femenino</td>
-          <td>$15.00</td>
-          <td><span class="badge bg-success">En Stock</span></td>
-          <td>De Carolina Herrera - toque fresco de jazmín y rosa, ideal para eventos festivos</td>
-        </tr>
-        <tr>
-          <td>INVICTUS</td>
-          <td>Masculino</td>
-          <td>$20.00</td>
-          <td><span class="badge bg-danger">Agotado</span></td>
-          <td>De Paco Rabanne, con notas marinas y cítricas, ideal para uso diario</td>
-        </tr>
-        <tr>
-          <td>Lady Million Lucky</td>
-          <td>Femenino</td>
-          <td>$15.50</td>
-          <td><span class="badge bg-success">En Stock</span></td>
-          <td>De Paco Rabanne, con un toque afrutado y floral. Ideal para noches inolvidables</td>
-        </tr>
-        <tr>
-          <td>Black Code</td>
-          <td>Masculino</td>
-          <td>$17.00</td>
-          <td><span class="badge bg-warning text-dark">Pocas unidades</span></td>
-          <td>De Giorgio Armani, con toques especiados y amaderados. Ideal para la noche</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  {% set heading = ' ' %}
+  {% set show_create = false %}
+  {% set show_search = false %}
+  {% set show_actions = false %}
+  {% set bordered = true %}
+
+  {% if productos is not defined and productos_destacados is defined %}
+    {% set productos = productos_destacados %}
+  {% endif %}
+
+  {% include "_productos_table.html" %}
 </div>
 
 {% endblock %}
+
+{% block extra_js %}{% endblock %}

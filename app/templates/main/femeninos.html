@@ -1,21 +1,86 @@
+{# app/templates/main/femeninos.html #}
 {% extends "base.html" %}
 {% block title %}Perfumería Femenina{% endblock %}
+
 {% block content %}
+<style>
+  :root{ --female:#d63384; }
+  .bg-femenina { background-color: var(--female) !important; }
+  .btn-fem     { background-color: var(--female); border-color: var(--female); color:#fff; }
+  .btn-fem:hover{ filter:brightness(0.9); color:#fff; }
+  .border-fem  { border-color: var(--female) !important; }
+  .stock-chip  { font-size:.8rem; }
+</style>
 
 <div class="container mt-5 content-box">
   <div class="descripcion-femenina text-center">
     <h1 class="titulo-3d">Colección de Perfumes Femeninos</h1>
-    <p>Sumérgete en un mundo floral, dulce y sofisticado. Nuestros perfumes femeninos están pensados para resaltar la elegancia, frescura y dulzura de cada mujer.</p>
-  </div>
-
-  <div class="text-center">
-    <img src="{{ url_for('static', filename='Images_/FEMENINOS.jpg') }}"
-         alt="Perfumes femeninos" class="img-fluid img-femenina" />
-  </div>
-
-  <div class="text-center mt-4">
-    <a href="{{ url_for('main.index') }}" class="btn pastel-button btn-rosa">Volver al Inicio</a>
+    <p>Elige tus fragancias favoritas y agrégalas al carrito.</p>
   </div>
 </div>
 
+<section class="container py-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+    {% for p in products %}
+      <div class="col">
+        <div class="card h-100 shadow-sm border border-fem">
+          <div class="card-header bg-femenina text-white fw-semibold d-flex justify-content-between">
+            <span class="card-title-text">{{ p['name'] }}</span>
+            <span class="badge rounded-pill bg-light text-dark stock-chip">
+              Stock: <span class="stock-count" data-slug="{{ p['slug'] }}">{{ p['stock'] }}</span>
+            </span>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h2 class="display-6 fw-bold my-3">${{ (p['price']|float)|round(2) }}</h2>
+            <ul class="list-unstyled small text-muted mb-4 desc"></ul>
+            <div class="mt-auto">
+              <button class="btn btn-fem w-100"
+                      data-slug="{{ p['slug'] }}"
+                      data-precio="{{ p['price'] }}"
+                      data-name="{{ p['name'] }}"
+                      data-gender="F"
+                      {% if p['stock']<=0 %}disabled{% endif %}>
+                {{ 'Agotado' if p['stock']<=0 else 'Agregar' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="col"><div class="alert alert-info">No hay perfumes femeninos cargados.</div></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container mt-3">
+  <ul class="list-group" id="carrito"></ul>
+</section>
+
+<footer id="footer" class="container mt-3">
+  <template id="templateFooter">
+    <div class="card">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <p class="lead mb-0">TOTAL: <span>$0</span></p>
+        <button class="btn btn-outline-primary" id="finalizar">Finalizar Compra</button>
+      </div>
+    </div>
+  </template>
+</footer>
+
+<template id="templateItem">
+  <li class="list-group-item text-uppercase text-white item-header bg-femenina">
+    <span class="badge bg-dark rounded-pill align-middle">0</span>
+    <span class="lead align-middle">Producto</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div><p class="lead mb-0">Total: <span>$0</span></p></div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-sm btn-success">Agregar</button>
+      <button class="btn btn-sm btn-danger">Quitar</button>
+    </div>
+  </li>
+</template>
+{% endblock %}
+{% block extra_js %}
+  <script type="module" src="{{ url_for('static', filename='script_femeninos.js') }}"></script>
 {% endblock %}

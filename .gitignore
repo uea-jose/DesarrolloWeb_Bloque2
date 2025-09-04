@@ -1,31 +1,70 @@
-﻿@"
-# Entorno virtual
-venv/
-ENV/
-.env
-
-# Archivos compilados Python
+﻿# --- Python / Flask ---
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
 
-# Base de datos local
-*.db
-*.sqlite3
+# Entorno virtual y variables de entorno
+venv/
+.env
+.env.*
+!.env.example
 
-# Logs
+# Instancia local de Flask (si la usas)
+instance/
+
+# Logs y cachés
 *.log
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+.mypy_cache/
+.pyre/
+.tox/
+.nox/
 
-# Configuración local
-*.cfg
-*.ini
+# Compilación / empaquetado
+build/
+dist/
+*.egg-info/
+.eggs/
 
-# VSCode / PyCharm
-.vscode/
-.idea/
-
-# Archivos de sistema
+# SO / IDE
 .DS_Store
 Thumbs.db
-"@ | Out-File -FilePath .gitignore -Encoding utf8
+.idea/
+.vscode/
+.vscode/*
+!.vscode/settings.json
+
+# Archivos temporales / backups
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+*.orig
+*.rej
+
+# Node (por si acaso)
+node_modules/
+
+# Bases de datos locales (no versionar DB generada)
+*.sqlite3
+*.db
+app/data/*.sqlite*
+app/data/*.db
+
+# Mantener datos de ejemplo (sí se versionan)
+!datos/*.csv
+!datos/*.json
+!datos/*.txt
+
+# Archivos binarios/paquetes
+*.zip
+*.tar
+*.tar.gz
+
+# Jupyter (por si apareciera)
+.ipynb_checkpoints/

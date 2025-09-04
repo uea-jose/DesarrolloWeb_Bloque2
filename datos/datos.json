@@ -1,0 +1,50 @@
+{
+  "usuarios": [
+    {
+      "nombre": "jose avila",
+      "email": "javilar@example.com",
+      "edad": 36,
+      "creado_en": "2025-09-03T19:42:15"
+    },
+    {
+      "nombre": "mafer vargars",
+      "email": "mvargas@exmaple.com",
+      "edad": 67,
+      "creado_en": "2025-09-03T19:42:44"
+    },
+    {
+      "nombre": "Pedro1",
+      "email": "pedro2@example.com",
+      "edad": 40,
+      "creado_en": "2025-09-03T21:21:07"
+    },
+    {
+      "nombre": "jose2",
+      "email": "javilar2@example.com",
+      "edad": 42,
+      "creado_en": "2025-09-03T21:31:11"
+    },
+    {
+      "nombre": "Fer",
+      "email": "Fer@uea.edu.ec",
+      "edad": 34,
+      "creado_en": "2025-09-03T21:40:55"
+    },
+    {
+      "nombre": "Anahi",
+      "email": "ana.pi@uea.edu.ec",
+      "edad": 36,
+      "provincia": "El Oro",
+      "ciudad": "Piñas",
+      "creado_en": "2025-09-03T22:01:21"
+    },
+    {
+      "nombre": "jose2",
+      "email": "javilar1@example.com",
+      "edad": 45,
+      "provincia": "Carchi",
+      "ciudad": "Tulcán",
+      "creado_en": "2025-09-04T00:21:06"
+    }
+  ]
+}

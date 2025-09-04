@@ -1,22 +1,86 @@
 {% extends "base.html" %}
 {% block title %}Perfumería Masculina{% endblock %}
 {% block content %}
+<style>
+  :root{
+    --male:#0b5ed7;
+  }
+  .bg-masculina { background-color: var(--male) !important; color:#fff; }
+  .btn-masc     { background-color: var(--male); border-color: var(--male); color:#fff; }
+  .btn-masc:hover{ filter:brightness(0.9); color:#fff; }
+  .border-masc  { border-color: var(--male) !important; }
+  .stock-chip   { font-size:.8rem; }
+</style>
 
 <div class="container mt-5 content-box">
-  <div class="descripcion text-center">
+  <div class="descripcion-masculina text-center">
     <h1 class="titulo-3d">Colección de Perfumes Masculinos</h1>
-    <p>Explora nuestra línea exclusiva de fragancias diseñadas para resaltar el carácter, elegancia y frescura del hombre moderno.
-       Aromas intensos, notas amaderadas y frascos sofisticados que expresan personalidad en cada gota.</p>
-  </div>
-
-  <div class="text-center">
-    <img src="{{ url_for('static', filename='Images_/MASCULINOS.jpg') }}"
-         alt="Perfumes masculinos" class="img-fluid img-masculina" />
-  </div>
-
-  <div class="text-center mt-4">
-    <a href="{{ url_for('main.index') }}" class="btn pastel-button btn-azul">Volver al Inicio</a>
+    <p>Elige tus fragancias favoritas y agrégalas al carrito.</p>
   </div>
 </div>
 
+<section class="container py-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+    {% for p in products %}
+      <div class="col">
+        <div class="card h-100 shadow-sm border border-masc">
+          <div class="card-header bg-masculina text-white fw-semibold d-flex justify-content-between">
+            <span class="card-title-text">{{ p['name'] }}</span>
+            <span class="badge rounded-pill bg-light text-dark stock-chip">
+              Stock: <span class="stock-count" data-slug="{{ p['slug'] }}">{{ p['stock'] }}</span>
+            </span>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h2 class="display-6 fw-bold my-3">${{ (p['price']|float)|round(2) }}</h2>
+            <ul class="list-unstyled small text-muted mb-4 desc"></ul>
+            <div class="mt-auto">
+              <button class="btn btn-masc w-100"
+                      data-slug="{{ p['slug'] }}"
+                      data-precio="{{ p['price'] }}"
+                      data-name="{{ p['name'] }}"
+                      data-gender="M"
+                      {% if p['stock']<=0 %}disabled{% endif %}>
+                {{ 'Agotado' if p['stock']<=0 else 'Agregar' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="col"><div class="alert alert-info">No hay perfumes masculinos cargados.</div></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container mt-3">
+  <ul class="list-group" id="carrito"></ul>
+</section>
+
+<footer id="footer" class="container mt-3">
+  <template id="templateFooter">
+    <div class="card">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <p class="lead mb-0">TOTAL: <span>$0</span></p>
+        <button class="btn btn-outline-primary" id="finalizar">Finalizar Compra</button>
+      </div>
+    </div>
+  </template>
+</footer>
+
+<template id="templateItem">
+  <li class="list-group-item text-uppercase text-white item-header bg-masculina">
+    <span class="badge bg-dark rounded-pill align-middle">0</span>
+    <span class="lead align-middle">Producto</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div><p class="lead mb-0">Total: <span>$0</span></p></div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-sm btn-success">Agregar</button>
+      <button class="btn btn-sm btn-danger">Quitar</button>
+    </div>
+  </li>
+</template>
+{% endblock %}
+{% block extra_js %}
+  <script type="module" src="{{ url_for('static', filename='script_masculinos.js') }}"></script>
 {% endblock %}

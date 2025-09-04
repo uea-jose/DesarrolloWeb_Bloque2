@@ -1,6 +1,6 @@
 # app/main/routes.py
-from flask import render_template, request, redirect, url_for, flash, make_response, jsonify
-from .db import get_conn, init_db, fetch_products_by_gender, apply_stock
+from flask import render_template, request, redirect, url_for, flash, make_response
+from .db import get_conn, init_db
 from . import main_bp as main  # mismo blueprint
 
 # ---------- Helper para render con no-cache ----------
@@ -46,49 +46,14 @@ def index():
 def esencias():
     return render_page("main/esencias.html", body_class="esencias")
 
-# ================== CATÁLOGOS (con carrito) ==================
 @main.route("/femeninos")
 def femeninos():
-    # Soporta: "Femenino", "F", "femenina", etc.
-    rows = fetch_products_by_gender("Femenino")
-    return render_page(
-        "main/femeninos.html",   # template estilo "frutas" adaptado a femeninos
-        gender="F",
-        products=rows,
-        body_class="femenina"
-    )
+    return render_page("main/femeninos.html", body_class="femenina")
 
 @main.route("/masculinos")
 def masculinos():
-    rows = fetch_products_by_gender("Masculino")
-    return render_page(
-        "main/masculinos.html",
-        gender="M",
-        products=rows,
-        body_class="masculina"
-    )
+    return render_page("main/masculinos.html", body_class="masculina")
 
-@main.post("/api/stock/apply")
-def api_stock_apply():
-    """
-    Body JSON: {"slug":"acqua-di-gio", "delta": +1 | -1}
-      +1 = reservar (resta stock)
-      -1 = devolver (suma stock)
-    """
-    data = request.get_json(force=True) or {}
-    slug  = data.get("slug")
-    delta = int(data.get("delta", 0))
-    if not slug or delta == 0:
-        return jsonify({"ok": False, "error": "payload_invalido"}), 400
-
-    ok, new_stock = apply_stock(slug, delta)
-    if not ok and delta > 0:
-        # No alcanzó el stock para reservar
-        return jsonify({"ok": False, "reason": "out_of_stock", "stock": new_stock}), 409
-
-    return jsonify({"ok": True, "slug": slug, "stock": new_stock})
-
-# --------- Otras páginas ---------
 @main.route("/contacto")
 def contacto():
     return render_page("main/contacto.html", body_class="contacto")
@@ -99,7 +64,7 @@ def buscar():
     resultados = []
     return render_page("main/buscar.html", q=q, resultados=resultados, body_class="buscar")
 
-# Inicializa BD de productos al cargar módulo (idempotente)
+# Inicializa BD de productos al cargar módulo
 init_db()
 
 # ===================== CRUD PRODUCTOS =====================
@@ -183,7 +148,7 @@ def productos_delete(pid):
     flash("Producto eliminado.", "info")
     return redirect(url_for("main.productos_list"))
 
-# Diagnóstico: ver rutas registradas (útil)
+# Diagnóstico: ver rutas registradas
 @main.route("/_routes")
 def _routes():
     from flask import current_app
