@@ -276,3 +276,19 @@ formulario.addEventListener("submit", (e) => {
     eventoToast.show();
   }, 1000);
 });
+
+document.addEventListener('click', function (e) {
+  const a = e.target.closest('#adminMenu a.go-catalog');
+  if (!a) return;
+
+  e.preventDefault(); // evita que navegue de inmediato
+  const ocEl = document.getElementById('adminMenu');
+  const oc   = bootstrap.Offcanvas.getOrCreateInstance(ocEl);
+
+  // cuando termine de cerrarse, navega
+  ocEl.addEventListener('hidden.bs.offcanvas', () => {
+    window.location.href = a.href;
+  }, { once: true });
+
+  oc.hide();
+});
