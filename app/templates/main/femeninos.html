@@ -4,12 +4,35 @@
 
 {% block content %}
 <style>
+  /* --- Mantén el color femenino para elementos globales (p. ej. encabezado del carrito) --- */
   :root{ --female:#d63384; }
   .bg-femenina { background-color: var(--female) !important; }
-  .btn-fem     { background-color: var(--female); border-color: var(--female); color:#fff; }
-  .btn-fem:hover{ filter:brightness(0.9); color:#fff; }
   .border-fem  { border-color: var(--female) !important; }
   .stock-chip  { font-size:.8rem; }
+
+  /* --- Paleta Kawaii: cada clase define dos tonos (base y acento) --- */
+  .palette-rose  { --c:#f8b6d3; --c2:#f06aa7; }   /* rosa */
+  .palette-lilac { --c:#e5d6ff; --c2:#b893ff; }   /* lila */
+  .palette-peach { --c:#ffd9c2; --c2:#ff9f80; }   /* durazno */
+  .palette-mint  { --c:#d5f8e6; --c2:#79e0b6; }   /* menta */
+  .palette-sky   { --c:#d7f0ff; --c2:#7ec6ff; }   /* celeste */
+  .palette-lemon { --c:#fff6bf; --c2:#ffe36e; }   /* limón suave */
+
+  /* --- Tema por tarjeta (usa las variables de cada palette-*) --- */
+  .product-card{
+    border: 1px solid var(--c2) !important;
+    border-radius: .75rem;
+  }
+  .product-card .card-header{
+    background-image: linear-gradient(135deg, var(--c), var(--c2));
+    color:#fff !important;
+    border-bottom: 0;
+  }
+  .product-card .btn-thematic{
+    background-image: linear-gradient(135deg, var(--c), var(--c2));
+    border: none; color:#fff;
+  }
+  .product-card .btn-thematic:hover{ filter:brightness(.92); color:#fff; }
 </style>
 
 <div class="container mt-5 content-box">
@@ -23,8 +46,10 @@
   <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
     {% for p in products %}
       <div class="col">
-        <div class="card h-100 shadow-sm border border-fem">
-          <div class="card-header bg-femenina text-white fw-semibold d-flex justify-content-between">
+        <!-- Asigna un color distinto rotando la paleta -->
+        <div class="card h-100 shadow-sm product-card
+             {{ loop.cycle('palette-rose','palette-lilac','palette-peach','palette-mint','palette-sky','palette-lemon') }}">
+          <div class="card-header text-white fw-semibold d-flex justify-content-between">
             <span class="card-title-text">{{ p['name'] }}</span>
             <span class="badge rounded-pill bg-light text-dark stock-chip">
               Stock: <span class="stock-count" data-slug="{{ p['slug'] }}">{{ p['stock'] }}</span>
@@ -34,7 +59,7 @@
             <h2 class="display-6 fw-bold my-3">${{ (p['price']|float)|round(2) }}</h2>
             <ul class="list-unstyled small text-muted mb-4 desc"></ul>
             <div class="mt-auto">
-              <button class="btn btn-fem w-100"
+              <button class="btn btn-thematic w-100"
                       data-slug="{{ p['slug'] }}"
                       data-precio="{{ p['price'] }}"
                       data-name="{{ p['name'] }}"
@@ -68,6 +93,7 @@
 </footer>
 
 <template id="templateItem">
+  <!-- El encabezado del carrito mantiene el tono base femenino -->
   <li class="list-group-item text-uppercase text-white item-header bg-femenina">
     <span class="badge bg-dark rounded-pill align-middle">0</span>
     <span class="lead align-middle">Producto</span>
@@ -81,6 +107,7 @@
   </li>
 </template>
 {% endblock %}
+
 {% block extra_js %}
   <script type="module" src="{{ url_for('static', filename='script_femeninos.js') }}"></script>
 {% endblock %}
