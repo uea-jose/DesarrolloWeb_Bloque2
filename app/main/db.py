@@ -128,3 +128,34 @@ def apply_stock(slug: str, delta: int):
     ).fetchone()
     conn.close()
     return True, (row["stock"] if row else 0)
+
+
+# ==== Unicidad por nombre (case-insensitive) ====
+def ensure_unique_index():
+    """
+    Crea un índice único case-insensitive sobre lower(nombre).
+    No falla si ya existe.
+    """
+    conn = get_conn(); cur = conn.cursor()
+    cur.execute(
+        "CREATE UNIQUE INDEX IF NOT EXISTS idx_productos_nombre_ci "
+        "ON productos(lower(nombre))"
+    )
+    conn.commit(); conn.close()
+
+def nombre_existe(nombre: str, exclude_id: int | None = None) -> bool:
+    """
+    Devuelve True si existe un producto con ese nombre (case-insensitive).
+    exclude_id: opcional para permitir editar el mismo registro.
+    """
+    conn = get_conn(); cur = conn.cursor()
+    if exclude_id is None:
+        cur.execute("SELECT 1 FROM productos WHERE lower(nombre)=lower(?) LIMIT 1", (nombre,))
+    else:
+        cur.execute(
+            "SELECT 1 FROM productos WHERE lower(nombre)=lower(?) AND id<>? LIMIT 1",
+            (nombre, exclude_id),
+        )
+    row = cur.fetchone()
+    conn.close()
+    return row is not None

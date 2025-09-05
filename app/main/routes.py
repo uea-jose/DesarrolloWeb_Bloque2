@@ -1,6 +1,7 @@
 # app/main/routes.py
+import sqlite3
 from flask import render_template, request, redirect, url_for, flash, make_response, jsonify
-from .db import get_conn, init_db, fetch_products_by_gender, apply_stock
+from .db import get_conn, init_db, fetch_products_by_gender, apply_stock, nombre_existe, ensure_unique_index
 from . import main_bp as main  # mismo blueprint
 
 # ---------- Helper para render con no-cache ----------
@@ -88,6 +89,17 @@ def api_stock_apply():
 
     return jsonify({"ok": True, "slug": slug, "stock": new_stock})
 
+
+
+@main.get("/api/productos/check_nombre")
+def api_check_nombre():
+    nombre = (request.args.get("nombre") or "").strip()
+    exclude_id = request.args.get("exclude_id")
+    try:
+        exclude_id = int(exclude_id) if exclude_id not in (None, "", "null") else None
+    except Exception:
+        exclude_id = None
+    return jsonify({"available": not nombre_existe(nombre, exclude_id)})
 # --------- Otras páginas ---------
 @main.route("/contacto")
 def contacto():
@@ -101,6 +113,12 @@ def buscar():
 
 # Inicializa BD de productos al cargar módulo (idempotente)
 init_db()
+
+# Garantiza índice único por nombre (idempotente)
+try:
+    ensure_unique_index()
+except Exception:
+    pass
 
 # ===================== CRUD PRODUCTOS =====================
 
@@ -136,11 +154,21 @@ def productos_create():
             return redirect(url_for("main.productos_create"))
 
         conn = get_conn(); cur = conn.cursor()
-        cur.execute("""
-            INSERT INTO productos(nombre,tipo,precio,stock)
-            VALUES(?,?,?,?)
-        """, (nombre, tipo, precio, stock))
-        conn.commit(); conn.close()
+        # Validar unicidad
+        if nombre_existe(nombre):
+            conn.close()
+            flash("Ya existe un producto con ese nombre.", "warning")
+            return redirect(url_for("main.productos_create"))
+        try:
+            cur.execute("""
+                INSERT INTO productos(nombre,tipo,precio,stock)
+                VALUES(?,?,?,?)
+            """, (nombre, tipo, precio, stock))
+            conn.commit(); conn.close()
+        except sqlite3.IntegrityError:
+            conn.rollback(); conn.close()
+            flash("Nombre duplicado. Debe ser único.", "danger")
+            return redirect(url_for("main.productos_create"))
         flash("Producto creado correctamente.", "success")
         return redirect(url_for("main.productos_list"))
 
@@ -156,14 +184,25 @@ def productos_edit(pid):
         precio = float((request.form.get("precio") or "0").replace(",", "."))
         stock  = int(request.form.get("stock") or "0")
 
-        cur.execute("""
-            UPDATE productos
-               SET nombre=?, tipo=?, precio=?, stock=?
-             WHERE id=?
-        """, (nombre, tipo, precio, stock, pid))
-        conn.commit(); conn.close()
-        flash("Producto actualizado.", "success")
-        return redirect(url_for("main.productos_list"))
+        # Unicidad al editar
+        if nombre_existe(nombre, exclude_id=pid):
+            conn.close()
+            flash("Ese nombre ya está en uso por otro producto.", "warning")
+            return redirect(url_for("main.productos_edit", pid=pid))
+
+        try:
+            cur.execute("""
+                UPDATE productos
+                   SET nombre=?, tipo=?, precio=?, stock=?
+                 WHERE id=?
+            """, (nombre, tipo, precio, stock, pid))
+            conn.commit(); conn.close()
+            flash("Producto actualizado.", "success")
+            return redirect(url_for("main.productos_list"))
+        except sqlite3.IntegrityError:
+            conn.rollback(); conn.close()
+            flash("Nombre duplicado. Debe ser único.", "danger")
+            return redirect(url_for("main.productos_edit", pid=pid))
 
     cur.execute("SELECT id,nombre,tipo,precio,stock FROM productos WHERE id=?", (pid,))
     row = cur.fetchone(); conn.close()

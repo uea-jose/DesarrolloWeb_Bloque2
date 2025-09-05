@@ -34,3 +34,38 @@
   </form>
 </div>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+(function(){
+  const input = document.querySelector('input[name="nombre"]');
+  if (!input) return;
+  let hint = document.getElementById('estadoNombre');
+  if (!hint) {
+    hint = document.createElement('small');
+    hint.id = 'estadoNombre';
+    hint.className = 'form-text';
+    input.parentNode.insertBefore(hint, input.nextSibling);
+  }
+  const setMsg = (m, cls) => { hint.textContent = m; hint.className = 'form-text ' + (cls||''); };
+  let timer;
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    const val = input.value.trim();
+    if (!val) { setMsg('', ''); return; }
+    timer = setTimeout(async () => {
+      try {
+        const u = new URL('{{ url_for("main.api_check_nombre") }}', window.location.origin);
+        u.searchParams.set('nombre', val);
+        const pid = {{ (prod.id if prod else 'null')|safe }};
+        if (pid) u.searchParams.set('exclude_id', pid);
+        const r = await fetch(u);
+        const data = await r.json();
+        if (data.available) setMsg('Disponible ✓', 'text-success');
+        else setMsg('Ya existe un producto con ese nombre', 'text-danger');
+      } catch (e) {}
+    }, 250);
+  });
+})();
+</script>
+{% endblock %}
