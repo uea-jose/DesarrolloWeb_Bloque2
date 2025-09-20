@@ -1,12 +1,11 @@
-Flask
-Flask-Login
-Flask-Login==0.6.3
+# Servidor web
 Flask==3.0.3
-Werkzeug
+Flask-Login==0.6.3
 Werkzeug==3.0.4
-gunicorn
 gunicorn==21.2.0
-mysql-connector-python
+
+# Conector MySQL
 mysql-connector-python==9.0.0
-python-dotenv
+
+# Variables de entorno (.env)
 python-dotenv==1.0.1
