@@ -46,3 +46,10 @@ CREATE USER IF NOT EXISTS 'flag_user'@'localhost' IDENTIFIED BY 'FlagUserPass!23
 GRANT ALL PRIVILEGES ON flask_login_db.* TO 'flag_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
+
+
+## Arranque sin `setup_db.py` (Auto-init)
+Desde esta versión, la base de datos y la tabla `usuarios` se crean automáticamente al iniciar la app,
+usando los valores de entorno (`MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DB`).
+Esto ocurre dentro de `app/__init__.py` llamando a `ensure_database_and_tables()` de `app/db_init.py`.
+Es seguro en ejecuciones concurrentes y no es necesario correr scripts adicionales en Render.
