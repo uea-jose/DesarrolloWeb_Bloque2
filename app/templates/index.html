@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="container">
+  <section class="hero-box mx-auto p-4 p-md-5 my-3 my-md-4 text-center">
+    <h1 class="display-6 fw-bold text-primary mb-2">Bienvenido a Aromas &amp; Fragancias</h1>
+    <p class="text-secondary mb-4">
+      Descubre los mejores aromas y esencias para cada ocasión. Calidad y frescura garantizadas.
+    </p>
+
+    <div class="d-flex flex-wrap gap-2 justify-content-center">
+      <a href="{{ url_for('auth.login') }}" class="btn-soft btn-soft-primary">
+        Iniciar sesión
+      </a>
+      <a href="{{ url_for('auth.registro') }}" class="btn-soft btn-soft-accent">
+        Registrarme
+      </a>
+    </div>
+  </section>
+</div>
+{% endblock %}

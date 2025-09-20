@@ -1,0 +1,50 @@
+/* Navbar con degradado suave */
+.nav-gradient {
+  background: linear-gradient(90deg, #e6f0ff, #e8f7f5);
+}
+
+/* Caja de bienvenida */
+.hero-box {
+  max-width: 960px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+/* Botones suaves */
+.btn-soft {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform .05s ease, box-shadow .2s ease;
+}
+
+.btn-soft:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.btn-soft-primary {
+  background: #cfe2ff;
+  color: #0d6efd;
+  border-color: #b6d2ff;
+}
+
+.btn-soft-accent {
+  background: #ffd6e7;
+  color: #b40053;
+  border-color: #ffc3dc;
+}
+/* Prioriza los estados de validación de Bootstrap aunque tengas estilos propios */
+.form-control.is-valid {
+  border-color: var(--bs-success) !important;
+  box-shadow: 0 0 0 .25rem rgba(25, 135, 84, .25) !important;
+}
+
+.form-control.is-invalid {
+  border-color: var(--bs-danger) !important;
+  box-shadow: 0 0 0 .25rem rgba(220, 53, 69, .25) !important;
+}

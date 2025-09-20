@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container my-4" style="max-width: 900px;">
+  <div class="card shadow-sm border-0">
+    <div class="card-body text-center">
+      <h1 class="h4 mb-3">✨ Bienvenido, {{ current_user.usuario }} ✨</h1>
+      <p class="text-muted">
+        Nos alegra verte de nuevo. Aquí encontrarás tu panel de control.
+      </p>
+      <hr>
+
+      <!-- BOTONES PRINCIPALES -->
+      <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+          <button class="btn btn-primary w-100" data-bs-toggle="offcanvas" data-bs-target="#offcanvasPerfil">
+            <i class="bi bi-person-circle"></i> Mi perfil
+          </button>
+        </div>
+        <div class="col-md-4 mb-3">
+          <button class="btn btn-success w-100" data-bs-toggle="offcanvas" data-bs-target="#offcanvasPedidos">
+            <i class="bi bi-basket"></i> Mis pedidos
+          </button>
+        </div>
+        <div class="col-md-4 mb-3">
+          <a href="{{ url_for('auth.logout') }}" class="btn btn-danger w-100">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OFFCANVAS PERFIL -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasPerfil">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">👤 Mi Perfil</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p><strong>Usuario:</strong> {{ current_user.usuario }}</p>
+    <p><strong>Email:</strong> {{ current_user.email or "No registrado" }}</p>
+    <p><strong>Rol:</strong> {{ current_user.rol or "Usuario estándar" }}</p>
+    <hr>
+    <button class="btn btn-outline-secondary w-100">
+      <i class="bi bi-pencil"></i> Editar perfil
+    </button>
+  </div>
+</div>
+
+<!-- OFFCANVAS PEDIDOS -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasPedidos">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">🛒 Mis pedidos</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="text-muted">Aquí aparecerán tus pedidos más recientes.</p>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Pedido #1
+        <span class="badge bg-success rounded-pill">Entregado</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Pedido #2
+        <span class="badge bg-warning rounded-pill">En camino</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Pedido #3
+        <span class="badge bg-danger rounded-pill">Pendiente</span>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
