@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+
+<!-- Bienvenida (caja 800px) -->
+<div class="container my-3 p-3 text-center content-box">
+  <h2 class="text-primary">Bienvenido a Aromas & Fragancias</h2>
+  <p class="text-secondary">
+    Descubre los mejores aromas y esencias para cada ocasión. Calidad y frescura garantizadas.
+  </p>
+  <a href="{{ url_for('main.femeninos') }}" class="pastel-button btn-menta llamativo">🌸 Explorar Catálogo</a>
+</div>
+
+<!-- Carrusel (ancho completo) -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='Images_/carrusel1.png') }}" class="d-block w-100 img-fluid" alt="Imagen 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='Images_/carrusel2.png') }}" class="d-block w-100 img-fluid" alt="Imagen 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='Images_/carrusel3.png') }}" class="d-block w-100 img-fluid" alt="Imagen 3">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='Images_/carrusel4.png') }}" class="d-block w-100 img-fluid" alt="Imagen 4">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- Productos destacados (caja 800px) -->
+<div class="container my-5 content-box">
+
+  <!-- Header con botones a CRUD -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="m-0 text-primary">Nuestros Productos + Destacados</h3>
+    <div class="d-flex gap-2">
+      <a class="btn btn-success" href="{{ url_for('main.productos_create', wid=session.get('wid')) }}">+ Ingresar producto</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('main.productos_list') }}">Gestionar productos</a>
+
+      <!-- 🔹 Botón que abre el Offcanvas -->
+      <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#adminDrawer" role="button" aria-controls="adminDrawer">
+        Panel rápido
+      </a>
+    </div>
+  </div>
+
+  {% set heading = ' ' %}
+  {% set show_create = false %}
+  {% set show_search = false %}
+  {% set show_actions = false %}
+  {% set bordered = true %}
+
+  {% if productos is not defined and productos_destacados is defined %}
+    {% set productos = productos_destacados %}
+  {% endif %}
+
+  {% include "_productos_table.html" %}
+</div>
+
+<!-- Offcanvas Admin -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="adminMenu" aria-labelledby="adminMenuLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="adminMenuLabel">
+      <i class="bi bi-sliders"></i> Panel de administración
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+
+  <!-- ====== AQUÍ EL CUERPO DEL PANEL ====== -->
+  <div class="offcanvas-body">
+    <p class="text-muted small">Accesos rápidos:</p>
+
+    <div class="list-group mb-3">
+      <a class="list-group-item list-group-item-action" href="{{ url_for('main.usuarios', wid=session.get('wid')) }}">
+        <i class="bi bi-people"></i> Administrar usuarios
+      </a>
+      <a class="list-group-item list-group-item-action" href="{{ url_for('main.productos_create', wid=session.get('wid')) }}">
+        <i class="bi bi-plus-circle"></i> Ingresar producto
+      </a>
+      <a class="list-group-item list-group-item-action" href="{{ url_for('main.productos_list') }}">
+        <i class="bi bi-table"></i> Gestionar productos
+      </a>
+    </div>
+
+    <!-- ☑ COMPRAR (callout destacado con colapso) -->
+    <div class="card buy-callout shadow-sm mb-3 border-0">
+      <div class="card-body py-2 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-bag-heart fs-5"></i>
+          <strong>Comprar</strong>
+        </div>
+        <button class="btn btn-sm btn-light" type="button"
+                data-bs-toggle="collapse" data-bs-target="#comprarCollapse"
+                aria-expanded="false" aria-controls="comprarCollapse">
+          Ver catálogos
+        </button>
+      </div>
+      <div class="collapse" id="comprarCollapse">
+        <div class="list-group list-group-flush">
+          <a class="list-group-item list-group-item-action list-group-item-buy"
+             href="{{ url_for('main.femeninos') }}" data-bs-dismiss="offcanvas">
+            <i class="bi bi-gender-female"></i> Catálogo femenino
+          </a>
+          <a class="list-group-item list-group-item-action list-group-item-buy"
+             href="{{ url_for('main.masculinos') }}" data-bs-dismiss="offcanvas">
+            <i class="bi bi-gender-male"></i> Catálogo masculino
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="small text-muted">
+      <i class="bi bi-info-circle"></i> Tip: puedes abrir este panel desde cualquier página.
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Offcanvas / Canvas lateral -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="adminDrawer" aria-labelledby="adminDrawerLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="adminDrawerLabel">Panel rápido</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="mb-3">
+      Gestiona tu catálogo y usuarios en un solo lugar. Mantén tus <strong>aromas</strong> al día y ofrece la mejor experiencia.
+    </p>
+
+    <div class="dropdown mt-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="adminMenu" data-bs-toggle="dropdown" aria-expanded="false">
+        Acciones rápidas
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="adminMenu">
+        <li>
+          <a class="dropdown-item" href="{{ url_for('main.usuarios', wid=session.get('wid')) }}">
+            <i class="bi bi-people"></i> Slides usuarios (Administrar usuarios)
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="{{ url_for('main.productos_list') }}">
+            <i class="bi bi-box-seam"></i> Slides productos (Gestionar/ingresar productos)
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Cierra el offcanvas cuando se hace clic en una opción
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#adminDrawer .dropdown-item')) {
+      const drawerEl = document.getElementById('adminDrawer');
+      const drawer = bootstrap.Offcanvas.getInstance(drawerEl);
+      if (drawer) drawer.hide();
+    }
+  });
+</script>
+{% endblock %}

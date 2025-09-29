@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h4 class="mb-4 text-center">Login</h4>
+          <form method="post" action="{{ url_for('auth.login') }}">
+            <div class="mb-3">
+              <label class="form-label">Usuario</label>
+              <input type="text" class="form-control" name="username" required autofocus>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Contraseña</label>
+              <input type="password" class="form-control" name="password" required>
+            </div>
+            <button class="btn btn-primary w-100">Login</button>
+          </form>
+          <div class="text-muted small mt-3">
+            Usuario demo: <code>jvilar</code> / <code>jvilar</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

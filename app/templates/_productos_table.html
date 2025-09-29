@@ -1,0 +1,95 @@
+
+{# app/templates/_productos_table.html #}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="m-0 text-primary">{{ heading or 'Inventario de Productos' }}</h2>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('main.productos_export_pdf', q=q or None) }}" class="btn btn-outline-secondary">Exportar PDF</a>
+    {% if show_create %}
+      <a href="{{ url_for('main.productos_create', wid=session.get('wid')) }}" class="btn btn-success">+ Ingresar producto</a>
+    {% endif %}
+  </div>
+</div>
+
+{% if show_search %}
+<form><input type="hidden" name="wid" value="{{ session.get('wid') }}"/> class="row g-2 mb-3" method="get" action="{{ url_for('main.productos_list') }}">
+  <div class="col-auto">
+    <input type="text" class="form-control" name="q" placeholder="Buscar por nombre o categoría" value="{{ q or '' }}">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-primary" type="submit">Buscar</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('main.productos_list') }}">Limpiar</a>
+  </div>
+</form>
+{% endif %}
+
+<div class="table-responsive">
+  <table class="table {{ 'table-bordered' if bordered else 'table-striped' }} align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Categoría</th>
+        <th>Stock</th>
+        <th>Precio</th>
+        {% if show_actions %}<th class="text-center">Acciones</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in productos %}
+      <tr>
+        <td>{{ '%04d'|format(p.id) }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.descripcion or '' }}</td>
+        <td>{% set cat=(p.categoria or '')|lower %}<span class="badge {% if 'mascul' in cat %}badge-cat-masculino{% elif 'femen' in cat %}badge-cat-femenino{% else %}badge-cat-esencia{% endif %}">{{ p.categoria }}</span></td>
+        <td>{% if p.stock|int==0 %}<span class='badge badge-stock-zero'>Agotado (0)</span>{% elif p.stock|int<4 %}<span class='badge badge-stock-low'>Pocas unidades ({{ p.stock }})</span>{% else %}<span class='badge badge-stock-ok'>En stock ({{ p.stock }})</span>{% endif %}</td>
+        <td>S/ {{ '%.2f'|format(p.precio) }}</td>
+        {% if show_actions %}
+        <td class="text-center">
+          <a class="btn btn-sm btn-primary" href="{{ url_for('main.productos_edit', pid=p.id) }}">Editar</a>
+          <form method="post" action="{{ url_for('main.productos_delete', pid=p.id) }}" style="display:inline" onsubmit="return confirm('¿Eliminar?')">
+            <button class="btn btn-sm btn-danger">Eliminar</button>
+          </form>
+        </td>
+        {% endif %}
+      </tr>
+    {% else %}
+      <tr><td colspan="{{ 6 + (1 if show_actions else 0) }}" class="text-center text-muted">Sin productos.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{# Paginación simple #}
+{% if pages and pages>1 %}
+<nav aria-label="Paginación">
+  <ul class="pagination">
+    {% for p in range(1, pages+1) %}
+      <li class="page-item {{ 'active' if p==page }}"><a class="page-link" href="{{ url_for('main.productos_list', q=q or None, page=p, per_page=per_page) }}">{{ p }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+
+<!-- Paginación -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center mt-3">
+    <!-- Botón Anterior -->
+    <li class="page-item {% if page <= 1 %}disabled{% endif %}">
+      <a class="page-link" href="{{ url_for('main.productos_list', q=q, page=page-1, per_page=per_page) }}">Anterior</a>
+    </li>
+
+    <!-- Números de página -->
+    {% for p in range(1, pages+1) %}
+    <li class="page-item {% if p == page %}active{% endif %}">
+      <a class="page-link" href="{{ url_for('main.productos_list', q=q, page=p, per_page=per_page) }}">{{ p }}</a>
+    </li>
+    {% endfor %}
+
+    <!-- Botón Siguiente -->
+    <li class="page-item {% if page >= pages %}disabled{% endif %}">
+      <a class="page-link" href="{{ url_for('main.productos_list', q=q, page=page+1, per_page=per_page) }}">Siguiente</a>
+    </li>
+  </ul>
+</nav>
+
+{% endif %}

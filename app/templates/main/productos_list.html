@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  {% set heading = 'Inventario de Perfumes' %}
+  {% set show_create = true %}
+  {% set show_search = true %}
+  {% set show_actions = true %}
+  {% set bordered = false %}
+
+  <div class="table-responsive">
+    {% include "_productos_table.html" %}
+  </div>
+
+  {# ==================== Paginación (siempre visible) ==================== #}
+  {% set total_pages = pages if pages and pages > 0 else 1 %}
+  {% set page = page if page and page > 0 else 1 %}
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-3">
+
+      {# Botón Anterior #}
+      <li class="page-item {% if page <= 1 %}disabled{% endif %}">
+        <a class="page-link"
+           href="{{ url_for('main.productos_list', q=q, page=(page-1 if page>1 else 1), per_page=per_page) }}">
+          &laquo; Anterior
+        </a>
+      </li>
+
+      {# Ventana centrada de 5 páginas (con puntos suspensivos cuando aplique) #}
+      {% set start = page - 2 if page - 2 > 1 else 1 %}
+      {% set end   = page + 2 if page + 2 < total_pages else total_pages %}
+
+      {% if start > 1 %}
+        <li class="page-item">
+          <a class="page-link" href="{{ url_for('main.productos_list', q=q, page=1, per_page=per_page) }}">1</a>
+        </li>
+        {% if start > 2 %}
+          <li class="page-item disabled"><span class="page-link">…</span></li>
+        {% endif %}
+      {% endif %}
+
+      {% for p in range(start, end + 1) %}
+        <li class="page-item {% if p == page %}active{% endif %}">
+          <a class="page-link"
+             href="{{ url_for('main.productos_list', q=q, page=p, per_page=per_page) }}">{{ p }}</a>
+        </li>
+      {% endfor %}
+
+      {% if end < total_pages %}
+        {% if end < total_pages - 1 %}
+          <li class="page-item disabled"><span class="page-link">…</span></li>
+        {% endif %}
+        <li class="page-item">
+          <a class="page-link"
+             href="{{ url_for('main.productos_list', q=q, page=total_pages, per_page=per_page) }}">{{ total_pages }}</a>
+        </li>
+      {% endif %}
+
+      {# Botón Siguiente #}
+      <li class="page-item {% if page >= total_pages %}disabled{% endif %}">
+        <a class="page-link"
+           href="{{ url_for('main.productos_list', q=q, page=(page+1 if page<total_pages else total_pages), per_page=per_page) }}">
+          Siguiente &raquo;
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+  {# ================== Fin paginación ================== #}
+
+</div>
+{% endblock %}

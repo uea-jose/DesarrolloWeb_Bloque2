@@ -1,0 +1,70 @@
+﻿# --- Python / Flask ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entorno virtual y variables de entorno
+venv/
+.env
+.env.*
+!.env.example
+
+# Instancia local de Flask (si la usas)
+instance/
+
+# Logs y cachés
+*.log
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+.mypy_cache/
+.pyre/
+.tox/
+.nox/
+
+# Compilación / empaquetado
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# SO / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.vscode/*
+!.vscode/settings.json
+
+# Archivos temporales / backups
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+*.orig
+*.rej
+
+# Node (por si acaso)
+node_modules/
+
+# Bases de datos locales (no versionar DB generada)
+*.sqlite3
+*.db
+app/data/*.sqlite*
+app/data/*.db
+
+# Mantener datos de ejemplo (sí se versionan)
+!datos/*.csv
+!datos/*.json
+!datos/*.txt
+
+# Archivos binarios/paquetes
+*.zip
+*.tar
+*.tar.gz
+
+# Jupyter (por si apareciera)
+.ipynb_checkpoints/

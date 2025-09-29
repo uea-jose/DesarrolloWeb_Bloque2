@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Registrarse{% endblock %}
+{% block content %}
+<div class="container my-4" style="max-width: 820px;">
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <h1 class="h4 mb-4">Registro de usuarios</h1>
+
+      <form class="needs-validation" method="post" action="{{ url_for('main.registrarse') }}" novalidate>
+        <!-- Nombre -->
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingNombre" name="nombre" placeholder="Ana Pérez" required>
+          <label for="floatingNombre">Nombre</label>
+          <div class="invalid-feedback">Ingresa tu nombre.</div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="ana@email.com" required>
+          <label for="floatingEmail">Email</label>
+          <div class="invalid-feedback">Ingresa un email válido.</div>
+        </div>
+
+        <!-- Edad -->
+        <div class="form-floating mb-3">
+          <input type="number" class="form-control" id="floatingEdad" name="edad" placeholder="28" min="0" step="1" required>
+          <label for="floatingEdad">Edad</label>
+          <div class="invalid-feedback">Ingresa una edad válida.</div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <!-- Provincia -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select class="form-select" id="floatingProvincia" name="provincia" required>
+                <option value="" selected disabled>Seleccione…</option>
+              </select>
+              <label for="floatingProvincia">Provincia</label>
+              <div class="invalid-feedback">Selecciona una provincia.</div>
+            </div>
+          </div>
+
+          <!-- Ciudad -->
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select class="form-select" id="floatingCiudad" name="ciudad" required disabled>
+                <option value="" selected disabled>Seleccione…</option>
+              </select>
+              <label for="floatingCiudad">Ciudad</label>
+              <div class="invalid-feedback">Selecciona una ciudad.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" type="submit">Registrarme</button>
+          <a class="btn btn-outline-secondary" href="{{ url_for('main.usuarios', wid=session.get('wid')) }}">Ver usuarios</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+/* Provincias y ciudades de Ecuador (cap. de cantón y principales) */
+const ECUADOR = {
+  "Azuay": ["Cuenca","Gualaceo","Paute","Santa Isabel","Girón","Sigsig","Chordeleg","Nabón","Oña","Pucará","San Fernando","Camilo Ponce Enríquez"],
+  "Bolívar": ["Guaranda","Chillanes","Chimbo","San Miguel","Echeandía","Caluma","Las Naves"],
+  "Cañar": ["Azogues","Biblián","Cañar","La Troncal","El Tambo","Suscal","Déleg"],
+  "Carchi": ["Tulcán","Bolívar","Espejo","Mira","Montúfar","San Pedro de Huaca"],
+  "Chimborazo": ["Riobamba","Guano","Alausí","Colta","Chambo","Chunchi","Guamote","Pallatanga","Penipe"],
+  "Cotopaxi": ["Latacunga","La Maná","Pujilí","Salcedo","Saquisilí","Sigchos"],
+  "El Oro": ["Machala","Arenillas","Atahualpa","Balsas","Chilla","El Guabo","Huaquillas","Las Lajas","Marcabelí","Pasaje","Piñas","Portovelo","Santa Rosa","Zaruma"],
+  "Esmeraldas": ["Esmeraldas","Atacames","Eloy Alfaro","Muisne","Quinindé","Rioverde","San Lorenzo"],
+  "Galápagos": ["Puerto Baquerizo Moreno","Puerto Ayora","Puerto Villamil"],
+  "Guayas": ["Guayaquil","Daule","Durán","Samborondón","Milagro","Naranjal","Balao","Balzar","Colimes","El Empalme","General Antonio Elizalde","Isidro Ayora","Lomas de Sargentillo","Marcelino Maridueña","Naranjito","Nobol","Palestina","Pedro Carbo","Playas","Salitre","Santa Lucía","Simón Bolívar","Yaguachi"],
+  "Imbabura": ["Ibarra","Antonio Ante (Atuntaqui)","Cotacachi","Otavalo","Pimampiro","Urcuquí"],
+  "Loja": ["Loja","Calvas (Cariamanga)","Catamayo","Celica","Chaguarpamba","Espíndola","Gonzanamá","Macará","Olmedo","Paltas (Catacocha)","Pindal","Puyango (Alamor)","Quilanga","Saraguro","Sozoranga","Zapotillo"],
+  "Los Ríos": ["Babahoyo","Baba","Buena Fé","Quevedo","Mocache","Montalvo","Palenque","Puebloviejo","Urdaneta","Valencia","Ventanas","Vinces"],
+  "Manabí": ["Portoviejo","Manta","Chone","El Carmen","Jipijapa","Montecristi","Rocafuerte","Santa Ana","Sucre (Bahía de Caráquez)","Tosagua","24 de Mayo","Bolívar (Calceta)","Flavio Alfaro","Jama","Jaramijó","Junín","Olmedo","Pedernales","Pichincha","San Vicente"],
+  "Morona Santiago": ["Macas","Gualaquiza","Huamboya","Limón Indanza","Logroño","Morona","Pablo Sexto","Palora","San Juan Bosco","Sucúa","Taisha","Tiwintza"],
+  "Napo": ["Tena","Archidona","Carlos Julio Arosemena Tola","El Chaco","Quijos"],
+  "Orellana": ["Francisco de Orellana (Coca)","Aguarico","La Joya de los Sachas","Loreto"],
+  "Pastaza": ["Puyo","Arajuno","Mera","Santa Clara"],
+  "Pichincha": ["Quito","Cayambe","Mejía (Machachi)","Pedro Moncayo (Tabacundo)","Pedro Vicente Maldonado","Puerto Quito","Rumiñahui (Sangolquí)"],
+  "Santa Elena": ["Santa Elena","La Libertad","Salinas"],
+  "Santo Domingo de los Tsáchilas": ["Santo Domingo","La Concordia"],
+  "Sucumbíos": ["Nueva Loja (Lago Agrio)","Cascales","Cuyabeno","Gonzalo Pizarro","Putumayo","Shushufindi","Sucumbíos"],
+  "Tungurahua": ["Ambato","Baños de Agua Santa","Cevallos","Mocha","Patate","Pelileo","Píllaro","Quero","Tisaleo"],
+  "Zamora Chinchipe": ["Zamora","Centinela del Cóndor","Chinchipe (Zumba)","El Pangui","Nangaritza","Palanda","Paquisha","Yacuambi","Yantzaza"]
+};
+
+(function(){
+  // Poblar provincias
+  const selProv = document.getElementById('floatingProvincia');
+  const selCiu  = document.getElementById('floatingCiudad');
+
+  Object.keys(ECUADOR).sort().forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p; opt.textContent = p;
+    selProv.appendChild(opt);
+  });
+
+  selProv.addEventListener('change', () => {
+    selCiu.innerHTML = '<option value="" selected disabled>Seleccione…</option>';
+    selCiu.disabled = !selProv.value;
+
+    if (!selProv.value) return;
+    ECUADOR[selProv.value].forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c; opt.textContent = c;
+      selCiu.appendChild(opt);
+    });
+  });
+
+  // Bootstrap validation (tu ejemplo adaptado)
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      // habilita validación estándar
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+{% endblock %}

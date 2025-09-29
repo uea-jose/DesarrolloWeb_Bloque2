@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h4 class="mb-2">Bienvenido, {{ user_nombre or user_username }}!</h4>
+      <p class="text-muted">Rol: <strong>{{ user_rol|capitalize }}</strong></p>
+      <hr>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <a href="{{ url_for('main.productos_list') }}" class="btn btn-outline-primary w-100">Productos</a>
+        </div>
+        {% if session.get('user_rol') == 'admin' %}
+        <div class="col-md-4">
+          <a href="{{ url_for('main.productos_create', wid=session.get('wid')) }}" class="btn btn-success w-100">Ingresar producto</a>
+        </div>
+        {% endif %}
+        <div class="col-md-4">
+          <a href="{{ url_for('auth.logout', wid=session.get('wid')) }}" class="btn btn-danger w-100">Salir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+
+/* Stock badges */
+.badge-stock-ok{background-color:#B9F6CA!important;color:#0b5137!important;border:1px solid #8EE6AE}
+.badge-stock-low{background-color:#FFE082!important;color:#5d4300!important;border:1px solid #FFCA28}
+.badge-stock-zero{background-color:#FF8A80!important;color:#5c0000!important;border:1px solid #FF5252}
+
+/* Category badges */
+.badge-cat-masculino{background-color:#0D47A1!important;color:#fff!important}
+.badge-cat-femenino{background-color:#D81B60!important;color:#fff!important}
+.badge-cat-esencia{background-color:#6B8E23!important;color:#fff!important}

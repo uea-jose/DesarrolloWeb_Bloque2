@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Buscar{% endblock %}
+{% block content %}
+<div class="container my-4 content-box">
+  <h3>Resultados para: "{{ q }}"</h3>
+  {% if resultados %}
+    <ul class="list-group">
+      {% for r in resultados %}
+        <li class="list-group-item">{{ r }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info mt-3">No se encontraron resultados.</div>
+  {% endif %}
+</div>
+{% endblock %}
