@@ -1,0 +1,149 @@
+/* ---------- Essenza Store – estilos globales ---------- */
+:root{
+  --brand-pink:#ff4f8a;   /* magenta del logo */
+  --brand-orange:#ff7a3d; /* naranja del carrito */
+}
+
+/* Fondo general suave */
+body{ background:#f6f7f9; }
+
+/* Texto con gradiente de marca (para el título Essenza Store) */
+.brand-gradient{
+  background: linear-gradient(90deg,var(--brand-pink),var(--brand-orange));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-weight:700; letter-spacing:.4px;
+}
+
+/* Navbar clara con línea inferior sutil */
+.navbar.bg-light{
+  background:#fff !important; border-bottom:1px solid #eef1f4;
+}
+
+/* Botón outline primary con color de marca */
+.btn-outline-primary{ border-color:var(--brand-pink); color:var(--brand-pink); }
+.btn-outline-primary:hover{ background:var(--brand-pink); color:#fff; }
+
+/* Botón principal con gradiente de marca */
+.btn-brand{
+  background:linear-gradient(90deg,var(--brand-pink),var(--brand-orange));
+  border:none; color:#fff;
+  box-shadow:0 10px 20px rgba(255,79,138,.25);
+}
+.btn-brand:hover{ filter:brightness(.98); box-shadow:0 10px 24px rgba(255,79,138,.35); }
+
+/* ---------- Página de login ---------- */
+
+/* Hero con “glow” de los colores del logo */
+.auth-hero{
+  min-height: calc(100vh - 56px); /* descuenta la navbar */
+  display:flex; align-items:center;
+  background:
+    radial-gradient(1200px 400px at 20% 30%, rgba(255,122,61,.12) 0%, transparent 60%),
+    radial-gradient(1200px 500px at 70% 25%, rgba(255,79,138,.14) 0%, transparent 60%),
+    linear-gradient(180deg, #f6f7f9 0%, #e9ecef 100%);
+}
+
+/* Tarjeta con efecto “glass” suave + ancho máximo */
+.auth-card{
+  border-radius:20px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(6px);
+  max-width:440px;
+  margin-inline:auto;
+}
+
+/* Todas las imágenes responsivas */
+img{ max-width:100%; height:auto; }
+
+/* Logo dentro de la tarjeta: tamaño y centrado */
+.auth-card .brand-logo{
+  /* responsive: min 120px, escala con viewport, max 180px */
+  width: clamp(120px, 16vw, 180px);
+  display:block;
+  margin-inline:auto;
+  filter:
+    drop-shadow(0 0 18px rgba(255,79,138,.45))
+    drop-shadow(0 0 10px rgba(255,122,61,.30));
+}
+
+.text-brand{ color:var(--brand-pink); }
+
+/* Focus en inputs grandes con color de marca */
+.form-control.form-control-lg:focus{
+  border-color:var(--brand-pink);
+  box-shadow:0 0 0 .25rem rgba(255,79,138,.15);
+}
+
+/* Aviso de credenciales demo (alto contraste) */
+.alert-demo{
+  background: rgba(248,249,250,.95);
+  border: 1px dashed rgba(0,0,0,.15);
+  color: #2b2b2b;
+  font-size: .95rem;
+}
+.alert-demo .demo-label{
+  color: var(--brand-pink);
+  font-weight: 700;
+}
+
+/* Píldoras “admin” con gradiente de marca */
+.badge-demo{
+  background: linear-gradient(90deg, var(--brand-pink), var(--brand-orange));
+  color: #fff;
+  border: 0;
+  padding: .35rem .6rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+/* Logo de la NAV (arriba) pequeño */
+.navbar .navbar-brand img{ height:28px; width:auto; }
+.alert-demo{
+  background: rgba(248,249,250,.95);
+  border: 1px dashed rgba(0,0,0,.15);
+  color: #2b2b2b;
+  font-size: .95rem;
+}
+.alert-demo .demo-label{
+  color: var(--brand-pink);
+  font-weight: 700;
+}
+.demo-cred{
+  display: inline-block;
+  padding: .28rem .6rem;
+  border-radius: 9999px;
+  background: #212529;
+  color: #fff !important;
+  font-weight: 600;
+  line-height: 1;
+}
+/* Caja blanca con sombra suave (contenedores de bienvenida y destacados) */
+.content-box{
+  max-width: 960px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+/* Botón pastel (estilo “llamativo”) */
+.pastel-button{
+  display:inline-block;
+  padding:.75rem 1.25rem;
+  border-radius: 9999px;
+  font-weight:600;
+  text-decoration:none;
+  border:0;
+  transition: transform .08s ease, filter .15s ease;
+}
+.pastel-button.llamativo:hover{ transform: translateY(-1px); filter: brightness(.98); }
+
+/* Variante menta (puedes crear más variantes si quieres) */
+.btn-menta{
+  background: linear-gradient(90deg,#a0f0d0,#70e4c0);
+  color:#094a3c;
+  box-shadow:0 10px 20px rgba(112,228,192,.25);
+}
+.btn-menta:hover{ color:#06382e; }
+
+/* Carousel: quita banding en imágenes muy grandes */
+.carousel .img-fluid{ object-fit: cover; }

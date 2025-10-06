@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<div class="container my-5" style="max-width: 980px">
+
+  <!-- Encabezado -->
+  <div class="text-center mb-4 p-4 bg-light border rounded shadow-sm">
+    <h2 class="mb-1">✨ Panel de Administración</h2>
+<p><a class="btn btn-success" href="{{ url_for('products.listar') }}">Dashboard Productos</a></p>
+    <p class="text-muted mb-0">Bienvenido, {{ current_user.usuario }}. Administra tu tienda aquí.</p>
+  </div>
+
+  <!-- Acciones principales -->
+  <div class="row g-4 text-center">
+
+    <!-- Gestión de Usuarios (abre offcanvas con el rol) -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <div class="display-5 mb-2 text-primary"><i class="bi bi-people-fill"></i></div>
+          <h5 class="card-title">Gestión de Usuarios</h5>
+          <p class="text-muted small">Ver tu tipo de usuario y permisos.</p>
+          <div class="mt-auto">
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#userRolePanel"
+              aria-controls="userRolePanel">
+              Abrir panel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gestión de Productos (redirige a /tienda que renderiza index.html) -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <div class="display-5 mb-2 text-success"><i class="bi bi-bag-check-fill"></i></div>
+          <h5 class="card-title">Gestión de Productos</h5>
+          <p class="text-muted small">Perfumes, precios y stock.</p>
+          <div class="mt-auto">
+            <a class="btn btn-success" href="{{ url_for('shop.home') }}">
+              Dashboard Productos
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cerrar sesión -->
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <div class="display-5 mb-2 text-danger"><i class="bi bi-box-arrow-right"></i></div>
+          <h5 class="card-title">Cerrar sesión</h5>
+          <p class="text-muted small">Termina tu sesión actual.</p>
+          <div class="mt-auto">
+            <a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Salir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bloque perfumería / agradecimiento -->
+  <hr class="my-5">
+  <div class="text-center">
+    <h3 class="text-primary mb-2">🧴 Perfumes & Gestión — ¡Gracias, administración!</h3>
+    <p class="text-muted small">Sigue administrando con estilo. Este módulo se irá ampliando.</p>
+  </div>
+</div>
+
+<!-- Offcanvas: detalle del rol de usuario -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="userRolePanel" aria-labelledby="userRolePanelLabel">
+  <div class="offcanvas-header">
+    <h5 id="userRolePanelLabel" class="mb-0">
+      <i class="bi bi-shield-lock-fill me-2"></i>Tu perfil
+    </h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="mb-1"><strong>Usuario:</strong> {{ current_user.usuario }}</p>
+    <p class="mb-3">
+      <strong>Rol:</strong>
+      {% if current_user.rol == 'admin' %}
+        <span class="badge bg-danger">Administrador</span>
+      {% elif current_user.rol == 'visor' %}
+        <span class="badge bg-secondary">Visor</span>
+      {% else %}
+        <span class="badge bg-primary">Cliente</span>
+      {% endif %}
+    </p>
+
+    <div class="small text-muted">
+      {% if current_user.rol == 'admin' %}
+        <ul class="mb-0">
+          <li>Acceso total a usuarios y productos.</li>
+          <li>Puede crear/editar/eliminar registros.</li>
+        </ul>
+      {% elif current_user.rol == 'visor' %}
+        <ul class="mb-0">
+          <li>Acceso de solo lectura a listados.</li>
+          <li>No puede modificar registros.</li>
+        </ul>
+      {% else %}
+        <ul class="mb-0">
+          <li>Acceso a funciones básicas de cliente.</li>
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

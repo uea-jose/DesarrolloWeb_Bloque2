@@ -1,0 +1,121 @@
+{# app/templates/_productos_table.html #}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="m-0 text-primary">{{ heading or 'Inventario de Perfumes' }}</h2>
+  {% if show_create %}
+    <a href="{{ url_for('products.nuevo') }}" class="btn btn-success">+ Ingresar producto</a>
+  {% endif %}
+</div>
+
+{% if show_search %}
+<form class="row g-2 mb-3" method="get" action="{{ url_for('products.listar') }}">
+  <div class="col-auto">
+    <input type="text" class="form-control" name="q" placeholder="Buscar por nombre o categoría" value="{{ q or '' }}">
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-primary" type="submit">Buscar</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('products.listar') }}">Limpiar</a>
+  </div>
+</form>
+{% endif %}
+
+<div class="table-responsive">
+  <table class="table table-hover align-middle bg-white rounded shadow-sm {% if bordered %}table-bordered{% endif %}">
+    <thead class="table-light">
+      <tr>
+        <th>Producto</th>
+        <th>Categoría</th>
+        <th>Descripción</th>
+        <th class="text-end">Precio</th>
+        <th class="text-center">Disponibilidad</th>
+        {% if show_actions %}<th class="text-center">Acciones</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in productos %}
+      <tr>
+        <td>{{ p['nombre'] }}<br><small class="text-muted">ID: {{ p.get('codigo', p.get('id')) }}</small></td>
+        <td>{{ p.get('categoria', p.get('categoria')) }}</td>
+        <td class="text-muted">{{ (p.get('descripcion','') or '')[:80] }}{% if (p.get('descripcion','')|length) > 80 %}…{% endif %}</td>
+        <td class="text-end">${{ '%.2f'|format(p['precio']) }}</td>
+        <td class="text-center">
+          {% set s = p['stock']|int %}
+          {% if s <= 0 %}
+            <span class="badge bg-danger">Agotado</span>
+          {% elif s <= 10 %}
+            <span class="badge bg-warning text-dark">Pocas unidades</span>
+          {% else %}
+            <span class="badge bg-success">En stock</span>
+          {% endif %}
+          <small class="text-muted">({{ s }})</small>
+        </td>
+        {% if show_actions %}
+        <td class="text-center">
+          <a class="btn btn-sm btn-primary" href="{{ url_for('products.editar', prod_id=p['id']) }}">Editar</a>
+          <form class="d-inline" method="post"
+                action="{{ url_for('products.eliminar', prod_id=p['id']) }}"
+                onsubmit="return confirm('¿Eliminar este producto?');">
+            <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
+          </form>
+        </td>
+        {% endif %}
+      </tr>
+    {% else %}
+      <tr>
+        <td colspan="{{ 5 + (1 if show_actions else 0) }}" class="text-center text-muted py-4">
+          Sin productos por ahora.
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+{# --- Paginación --- #}
+{% if page is defined and total_pages is defined and pages is defined %}
+  <nav aria-label="Paginación" class="d-flex justify-content-center mt-3">
+    <ul class="pagination pagination-sm essenza-pagination">
+      <li class="page-item {{ 'disabled' if page <= 1 }}">
+        <a class="page-link" href="{{ url_for('products.listar', page=page-1) if page > 1 else '#' }}" tabindex="{{ '-1' if page <= 1 else '0' }}">Anterior</a>
+      </li>
+
+      {% for n in pages %}
+        <li class="page-item {{ 'active' if n == page }}">
+          <a class="page-link" href="{{ url_for('products.listar', page=n) }}">{{ n }} {% if n == page %}<span class="visually-hidden">(actual)</span>{% endif %}</a>
+        </li>
+      {% endfor %}
+
+      <li class="page-item {{ 'disabled' if page >= total_pages }}">
+        <a class="page-link" href="{{ url_for('products.listar', page=page+1) if page < total_pages else '#' }}" tabindex="{{ '-1' if page >= total_pages else '0' }}">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
+{% endif %}
+
+<style>
+:root{
+  --essenza-rose: var(--brand-rose, #ff5e88);
+  --essenza-orange: var(--brand-orange, #ff7e5f);
+}
+.pagination.essenza-pagination .page-link{
+  border-radius: .5rem;
+  border: 1px solid rgba(255, 94, 136, .25);
+  color: var(--essenza-rose);
+}
+.pagination.essenza-pagination .page-link:hover{
+  background-color: rgba(255, 94, 136, .08);
+  color: var(--essenza-rose);
+}
+.pagination.essenza-pagination .page-item.active .page-link{
+  color: #fff;
+  border-color: transparent;
+  background-image: linear-gradient(90deg, var(--essenza-rose), var(--essenza-orange));
+  box-shadow: 0 .25rem .5rem rgba(255, 94, 136, .25);
+}
+.pagination.essenza-pagination .page-item.disabled .page-link{
+  color: #bbb; border-color: #eee; background-color: #fafafa;
+  pointer-events: none;
+}
+</style>

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Nuevo' if modo=='nuevo' else 'Editar' }} producto — Essenza Store{% endblock %}
+{% block content %}
+<div class="container my-5 content-box" style="max-width:900px;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="m-0 text-primary">{{ 'Nuevo producto' if modo=='nuevo' else 'Editar producto' }}</h3>
+    <div class="d-flex gap-2">
+      <a href="{{ url_for('products.listar') }}" class="btn btn-outline-secondary">Volver</a>
+    </div>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}{% for cat, msg in messages %}<div class="alert alert-{{cat}}">{{ msg }}</div>{% endfor %}{% endif %}
+  {% endwith %}
+
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" name="nombre" class="form-control" required minlength="2" value="{{ (data.nombre if data else '') or request.form.get('nombre','') }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Descripción</label>
+      <textarea name="descripcion" class="form-control" rows="3">{{ (data.descripcion if data else '') or request.form.get('descripcion','') }}</textarea>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Categoría</label>
+        <select name="categoria_id" class="form-select">
+          {% for c in categorias %}
+            {% set sel = '' %}{% if data and data.categoria_id==c.id %}{% set sel='selected' %}{% elif request.form.get('categoria_id') and request.form.get('categoria_id')|int==c.id %}{% set sel='selected' %}{% endif %}
+            <option value="{{ c.id }}" {{ sel }}>{{ c.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Precio</label>
+        <input type="number" step="0.01" min="0" name="precio" class="form-control" value="{{ (data.precio if data else 0) or request.form.get('precio','0') }}">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Stock</label>
+        <input type="number" min="0" name="stock" class="form-control" value="{{ (data.stock if data else 0) or request.form.get('stock','0') }}">
+      </div>
+    </div>
+    <div class="mt-4 d-flex gap-2">
+      <button class="btn btn-primary" type="submit">Guardar</button>
+      <a class="btn btn-light" href="{{ url_for('products.listar') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

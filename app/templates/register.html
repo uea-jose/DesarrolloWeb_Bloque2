@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<div class="container" style="max-width:480px">
+  <h3 class="my-3 text-center">Registro de usuarios</h3>
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Usuario</label>
+      <input class="form-control" name="usuario" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Contraseña</label>
+      <input class="form-control" type="password" name="password" required minlength="8" placeholder="Min 8, con mayús, minús y números">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Repetir contraseña</label>
+      <input class="form-control" type="password" name="password2" required>
+    </div>
+    <button class="btn btn-success w-100">Registrarme</button>
+  </form>
+  <div class="text-center mt-3">
+    <a href="{{ url_for('auth.login') }}">¿Ya tienes cuenta? Inicia sesión</a>
+  </div>
+</div>
+{% endblock %}

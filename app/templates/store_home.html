@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Tienda — Essenza Store{% endblock %}
+{% block content %}
+<div class="container my-5 content-box">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="m-0 text-primary">Catálogo de la Tienda</h3>
+    <div class="d-flex gap-2">
+      <a class="btn btn-outline-primary" href="{{ url_for('products.listar') }}">Gestionar productos</a>
+      <a class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">Panel rápido</a>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <div class="display-5 mb-2 text-pink"><i class="bi bi-gender-female"></i></div>
+          <h4>Catálogo Femenino</h4>
+          <p class="text-muted small">Fragancias, esencias y más para ellas.</p>
+          <div class="mt-auto">
+            <a class="btn btn-gradient" href="{{ url_for('shop.categoria', slug='femenino') }}">Ver catálogo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <div class="display-5 mb-2 text-primary"><i class="bi bi-gender-male"></i></div>
+          <h4>Catálogo Masculino</h4>
+          <p class="text-muted small">Aromas y esencias para ellos.</p>
+          <div class="mt-auto">
+            <a class="btn btn-gradient" href="{{ url_for('shop.categoria', slug='masculino') }}">Ver catálogo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-4">
+  <h5 class="text-secondary">Productos destacados</h5>
+  <p class="text-muted small">Pronto: carrusel / destacados automáticos.</p>
+</div>
+
+{% include "_cart_offcanvas.html" %}
+
+<style>
+.btn-gradient{ background-image: linear-gradient(90deg, #ff5e88, #ff7e5f); color:#fff; border:0; }
+.btn-gradient:hover{ opacity:.95; color:#fff; }
+.text-pink{ color:#ff5e88; }
+</style>
+{% endblock %}

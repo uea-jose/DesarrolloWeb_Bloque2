@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Productos — Essenza Store{% endblock %}
+{% block content %}
+<div class="container my-5 content-box">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="m-0 text-primary">Nuestros Productos + Destacados</h3>
+    <div class="d-flex gap-2">
+      <a class="btn btn-success" href="{{ url_for('products.nuevo') }}">+ Ingresar producto</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('products.listar') }}">Gestionar productos</a>
+      <a class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#adminMenu" role="button" aria-controls="adminMenu">Panel rápido</a>
+    </div>
+  </div>
+
+  {% set heading = ' ' %}
+  {% set show_create = False %}
+  {% set show_search = False %}
+  {% set show_actions = True %}
+  {% set bordered = True %}
+
+  {% include "_productos_table.html" %}
+</div>
+{% endblock %}

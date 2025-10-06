@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Inicio — Essenza Store{% endblock %}
+{% block content %}
+
+<!-- Bienvenida -->
+<div class="container my-4 p-4 text-center content-box" style="max-width: 900px;">
+  <h2 class="brand-gradient mb-2">Bienvenido a Essenza Store</h2>
+  <p class="text-secondary">
+    Descubre los mejores aromas y esencias para cada ocasión. Calidad y frescura garantizadas.
+  </p>
+  <div class="d-flex gap-2 justify-content-center">
+    <a class="btn btn-brand" href="{{ url_for('auth.dashboard') }}">Ir al panel</a>
+    <a class="pastel-button btn-menta llamativo" href="#">
+      🌸 Explorar Catálogo
+    </a>
+  </div>
+</div>
+
+<!-- Carrusel de ejemplo -->
+<div id="homeCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
+  </div>
+
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='img/hero1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/hero2.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/hero3.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 3">
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+{% endblock %}

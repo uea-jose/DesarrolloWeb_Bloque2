@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Ingresar — Essenza Store{% endblock %}
+{% block content %}
+
+<section class="auth-hero">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-5">
+        <div class="card auth-card shadow-lg border-0">
+          <div class="card-body p-4 p-md-5">
+
+            <div class="text-center mb-4">
+              <img src="{{ url_for('static', filename='img/essenza_logo.png') }}"
+                   class="brand-logo mx-auto d-block mb-2"
+                   alt="Essenza Store logo">
+              <h1 class="h4 fw-bold mb-0">Bienvenido a <span class="text-brand">Essenza Store</span></h1>
+              <p class="text-muted small mb-0">Inicia sesión para administrar tu tienda</p>
+            </div>
+
+            <form method="post" novalidate>
+              <div class="mb-3">
+                <label class="form-label">Usuario</label>
+                <input class="form-control form-control-lg" name="usuario" required autofocus>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">Contraseña</label>
+                <input class="form-control form-control-lg" type="password" name="password" required>
+              </div>
+              <div class="d-grid mt-3">
+                <button class="btn btn-brand btn-lg">Entrar</button>
+              </div>
+            </form>
+
+         <div class="alert alert-demo text-center mt-3 mb-0" role="alert">
+          <span class="demo-label"><i class="bi bi-key me-1"></i> Usuario demo:</span>
+          <span class="demo-cred ms-1">admin</span>
+          <span class="mx-1">/</span>
+          <span class="demo-cred">admin</span>
+        </div>
+
+
+            <div class="text-center mt-3">
+              <a class="link-brand" href="{{ url_for('auth.register') }}">¿No tienes cuenta? Regístrate</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
