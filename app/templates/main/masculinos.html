@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Perfumería Masculina{% endblock %}
+{% block content %}
+
+<div class="container mt-5 content-box">
+  <div class="descripcion text-center">
+    <h1 class="titulo-3d">Colección de Perfumes Masculinos</h1>
+    <p>Explora nuestra línea exclusiva de fragancias diseñadas para resaltar el carácter, elegancia y frescura del hombre moderno.
+       Aromas intensos, notas amaderadas y frascos sofisticados que expresan personalidad en cada gota.</p>
+  </div>
+
+  <div class="text-center">
+    <img src="{{ url_for('static', filename='Images_/MASCULINOS.jpg') }}"
+         alt="Perfumes masculinos" class="img-fluid img-masculina" />
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('main.index') }}" class="btn pastel-button btn-azul">Volver al Inicio</a>
+  </div>
+</div>
+
+{% endblock %}

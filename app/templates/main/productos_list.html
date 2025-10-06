@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Productos{% endblock %}
+{% block content %}
+<div class="container my-4">
+  {% set heading = 'Inventario de Perfumes' %}
+  {% set show_create = true %}
+  {% set show_search = true %}
+  {% set show_actions = true %}
+  {% set bordered = false %}
+  {% include "_productos_table.html" %}
+</div>
+{% endblock %}
