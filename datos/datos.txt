@@ -1,0 +1,8 @@
+# nombre,email,edad,creado_en
+jose avila,javilar@example.com,36,2025-09-03T19:42:15
+mafer vargars,mvargas@exmaple.com,67,2025-09-03T19:42:44
+Pedro1,pedro2@example.com,40,2025-09-03T21:21:07
+jose2,javilar2@example.com,42,2025-09-03T21:31:11
+Fer,Fer@uea.edu.ec,34,2025-09-03T21:40:55
+Anahi,ana.pi@uea.edu.ec,36,El Oro,Piñas,2025-09-03T22:01:21
+jose2,javilar1@example.com,45,Carchi,Tulcán,2025-09-04T00:21:06
